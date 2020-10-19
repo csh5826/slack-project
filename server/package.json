@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "slack-project backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csh5826/slack-project.git"
+  },
+  "author": "COHORT X",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csh5826/slack-project/issues"
+  },
+  "homepage": "https://github.com/csh5826/slack-project#readme",
+  "dependencies": {
+    "mongoose": "^5.10.9"
+  }
+}
