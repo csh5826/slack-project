@@ -1,0 +1,107 @@
+{
+    "users": [
+        {
+            "user_Id": 1,
+            "username": "Clark"
+        },
+        {
+            "user_Id": 2,
+            "username": "Daniel"
+        },
+        {
+            "user_Id": 3,
+            "username": "Jim"
+        },
+        {
+            "user_id": 4,
+            "username": "PJ"
+        }
+    ],
+
+   
+    "channels": [
+        {
+            "channel_Id": 101,
+            "name": "General",
+            "firstUser_Id": null,
+            "secondUser_Id": null
+        },
+        {
+            "channel_Id": 102,
+            "name": "Javascript",
+            "firstUser_Id": null,
+            "secondUser_Id": null
+        },
+        {
+            "channel_Id": 103,
+            "name": "Clark/Jim",
+            "firstUser_Id": 1,
+            "secondUser_Id": 3 
+        },
+        {
+            "channel_Id": 104,
+            "name": "Daniel/PJ",
+            "firstUser_Id": 2,
+            "secondUser_Id": 4
+        }
+    ],
+
+    "messages": [
+        {
+            "message_Id": 1,
+            "channel_Id": 101,
+            "user_Id": 1,
+            "content": "Welcome to General!",
+            "timestamp": 12345678909876
+        },
+        {
+            "message_Id": 2,
+            "channel_Id": 101,
+            "user_Id": 2,
+            "content": "Thank you!",
+            "timestamp": 13345678909876
+        },
+        {
+            "message_Id": 3,
+            "channel_Id": 102,
+            "user_Id": 3,
+            "content": "I love Javascript!",
+            "timestamp": 14345678909876
+        },
+        {
+            "message_Id": 4,
+            "channel_Id": 102,
+            "user_Id": 4,
+            "content": "It is so fun to learn",
+            "timestamp": 14345678909876
+        },
+        {
+            "message_Id": 5,
+            "channel_Id": 103,
+            "user_Id": 1,
+            "content": "hi, my name is Clark",
+            "timestamp": 15345678909876
+        },
+        {
+            "message_Id": 6,
+            "channel_Id": 103,
+            "user_Id": 3,
+            "content": "hey man, I'm Jim",
+            "timestamp": 16345678909876
+        },
+        {
+            "message_Id": 7,
+            "channel_Id": 104,
+            "user_Id": 2,
+            "content": "I'm so into learning Guitar",
+            "timestamp": 17345678909876
+        },
+        {
+            "message_Id": 8,
+            "channel_Id": 104,
+            "user_Id": 4,
+            "content": "I know.",
+            "timestamp": 18345678909876
+        }
+    ]
+}
