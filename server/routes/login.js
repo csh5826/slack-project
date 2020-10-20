@@ -1,4 +1,4 @@
-const { response } = require('express');
+// const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -6,11 +6,12 @@ const router = express.Router();
 
 router.post('/api/login', (request, response, next) => {
   // response.send(request.body)
-  response.send("hello from login!");
+  // response.send("hello from login!");
+
 
   //Create a new user and add them to database. (here we are just trying to return them)
-  // let newUser = {user_Id: Math.random(), name: request.body};
-  // response.send(newUser);
+  let newUser = {user_Id: Math.random(), name: request.body.name};
+  response.send(newUser);
 
   //route to general channel page
   
@@ -21,5 +22,10 @@ router.post('/api/login', (request, response, next) => {
   //     res.status(500).send(error);
   //   })
 })
+
+router.get('/api/', (request, response, next) => {
+  response.send("hello from api root!");
+})
+
 
 module.exports = router;
