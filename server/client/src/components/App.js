@@ -7,6 +7,10 @@ function App() {
   const postMessage = (event) => {
     console.log('post button clicked');
   };
+  const logoutClicked = (event) => {
+    console.log('logout button clicked');
+  };
+
   return (
     <Container fluid>
     <Row>&nbsp;</Row>
@@ -33,7 +37,7 @@ function App() {
       
       </Col>
     <Col sm={9}>
-    <Button variant="outline-dark" size="sm" className="float-right">Logout</Button>
+    <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
     <div className="chat-window" style={{background: 'snow', height: '90%'}}><ListGroup variant="flush">
       <ListGroup.Item style={{background: 'snow'}}><b>PJ</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>WordsWords blahblah stuffftuff meaningless stuff</ListGroup.Item>
