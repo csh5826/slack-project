@@ -23,12 +23,8 @@ app.use(express.static('public'));
 app.use(express.static('node_modules'));
 
 app.use('/', root);
-app.use('/login', login);
-app.use('/channels', channels);
-
-//add what we need for postgres here
-// const mongoose = require('mongoose');
-// mongoose.connect(keys.MONGODB_URI);
+app.use('/api/login', login);
+app.use('/api/channels', channels);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
