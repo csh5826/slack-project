@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import socketio from 'socket.io-client';
+const server = 'http://localhost:5000/'
 
 function App() {
   const io = socketio(server);
