@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const channel_model = require('./models/channel_model')
+const channel_model = require('../models/channel_model')
 
 
 const channels = [

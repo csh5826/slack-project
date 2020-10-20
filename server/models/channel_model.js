@@ -5,7 +5,7 @@ const pool = new Pool({
 
 const getChannel = () => {
     return new Promise(function(resolve, reject) {
-      pool.query('SELECT * FROM channels ORDER BY id ASC', (error, results) => {
+      pool.query('SELECT * FROM channel ORDER BY id ASC', (error, results) => {
         if (error) {
           reject(error)
         }
