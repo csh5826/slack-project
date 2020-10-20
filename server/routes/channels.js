@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const channel_model = require('../models/channel_model')
-
+// const channel_model = require('../models/channel_model')
 
 const channels = [
     {
@@ -40,14 +39,15 @@ router.param('channel_Id', function (request, response, next, id) {
 
 //Functionality prob not correct, but wanted to get router info in place
 router.get('/api/channel/:channel_Id', (request, response, next) => {
+
   response.send("welcome to channels");
-  channel_model.getChannel()
-  .then(response => {
-    res.status(200).send(response);
-  })
-  .catch(error => {
-    res.status(500).send(error);
-  })
+  // channel_model.getChannel()
+  // .then(response => {
+  //   res.status(200).send(response);
+  // })
+  // .catch(error => {
+  //   res.status(500).send(error);
+  // })
 })
 
 
