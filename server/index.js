@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const channels = require('./routes/channels');
 const login = require('./routes/login');
 const root = require('./routes/login');
+const http = require('http');
+const socketio = require('socket.io');
 
 const app = express();
 
@@ -41,8 +43,13 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-
 let port = process.env.PORT || 5000;
-app.listen(port, function () {
+//socketio set up
+const server = http.createServer(app);
+const io = socketio(server);
+
+server.listen(port, function () {
   console.log('Listening on port ' + port);
 });
+
+
