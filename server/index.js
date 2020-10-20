@@ -44,6 +44,11 @@ let port = process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = socketio(server);
 
+io.on('connection', (socket) => {
+  console.log('new user connected')
+  socket.emit('connection', null)
+});
+
 server.listen(port, function () {
   console.log('Listening on port ' + port);
 });
