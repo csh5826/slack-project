@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
-  
+
+const user_model = require('../models/user_model')
+
+
 router.get('/', (request, response, next) => {
-    response.send("welcome to root");
+  response.send("welcome to root");
 })
 
 
 router.post('/login', (request, response, next) => {
-    response.send("hello from login!")
-    // response.send(request.body)
-  // //mongoose model-schema style--what will we need for SQL?
-  // let user = new User()
-  // user.name = request.body.name;  
-  // user.push(user.name);
+  response.send("hello from login!");
+  user_model.createUser()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
 
-  // user.save((error) => {
-  //   if (error) return next(error);
-  //   response.end();
-  // });
-});
 
 module.exports = router;
