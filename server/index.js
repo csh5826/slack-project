@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const channels = require('./routes/channels');
 const login = require('./routes/login');
-const root = require('./routes/login');
+// const root = require('./routes/login');
 const http = require('http');
 const socketio = require('socket.io');
 
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
 
-app.use('/', root);
+// app.use('/', root);
 app.use('/api/login', login);
 app.use('/api/channels', channels);
 
