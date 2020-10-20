@@ -1,13 +1,15 @@
 import { SET_CURRENT_USER } from '../actions';
 
-const initialState = {username : null, id: 0};
+const initialState = {username : null, id: null};
 
 export default function (state = initialState, action) {
   console.log('in reducer-user');
 
   switch (action.type) {
     case SET_CURRENT_USER:
-      return action.payload;
+      console.log("setCurrentUser reducer has ", action.payload);
+      console.log('and will send', {username: action.payload, id: null} )
+      return {username: action.payload, id: null}
     default:
       return state;
   }
