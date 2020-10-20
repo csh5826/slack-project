@@ -4,6 +4,10 @@ import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 function App() {
+  const io = socketio(server);
+  io.on('connection', () => {
+    console.log('we are connected with the backend')
+  })
   return (
     <Container fluid>
     <Row>&nbsp;</Row>
