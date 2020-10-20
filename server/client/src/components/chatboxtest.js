@@ -13,15 +13,15 @@ const [chat, setChat] = useState([])
 
 useEffect(() => {
     io.on('message', ({name, message}) => {
-        setChat([...chat, {name, messsage}])
+        setChat([...chat, {name, message}])
     })
 })
 const renderChat = () => {
-    return chat.map(({name, message}, index) => {
+    return chat.map(({name, message}, index) => (
         <div key={index}>
             <h3>{name}: <span>{message}</span></h3>
         </div>
-    })
+    ))
 }
 
 const onTextChange = (e) => {
@@ -52,7 +52,12 @@ const onMessageSubmit = (e) => {
                 <h1>chat log</h1>
                 {renderChat()}
             </div>
+            <form>
+                <h1>something</h1>
+                <h2>else</h2>
+            </form>
         </div>
+
     
     );
   }
