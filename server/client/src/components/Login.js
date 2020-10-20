@@ -30,7 +30,7 @@ const submitLogin = (event) => {
       <Col md="auto">
       <h3>Enter your name to join:</h3>
       <InputGroup className="mb-3" onKeyDown={submitLogin}><FormControl placeholder="Your name"></FormControl></InputGroup>
-      <Button variant="outline-dark" onClick={submitLogin}>Login</Button>
+      <Button variant="outline-dark" onClick={submitLogin} className="float-right">Login</Button>
       </Col>
       <Col></Col>
       </Row>
