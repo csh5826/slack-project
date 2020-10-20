@@ -52,10 +52,6 @@ const onMessageSubmit = (e) => {
                 <h1>chat log</h1>
                 {renderChat()}
             </div>
-            <form>
-                <h1>something</h1>
-                <h2>else</h2>
-            </form>
         </div>
 
     
