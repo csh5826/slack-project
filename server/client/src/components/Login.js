@@ -7,13 +7,19 @@ import { Row, Container, Col, InputGroup, FormControl, Button } from 'react-boot
 
 
 
-class Login extends Component {
-  // onSubmit = formProps => {
-  //   this.props.signin(formProps, () => {
+//class Login extends Component {
+const Login = (props) => {
+const submitLogin = (event) => {
+  console.log(event.target.value);
+  if (event.key === "Enter") {
+    props.setCurrentUser(event.target.value);
+  }
+  //   
+  // this.props.signin(formProps, () => {
   //     this.props.history.push('/');
   //   });
-  // };
-  render() {
+  };
+  //render() {
 
 
   return (
@@ -23,8 +29,8 @@ class Login extends Component {
         <Col></Col>
       <Col md="auto">
       <h3>Enter your name to join:</h3>
-      <InputGroup className="mb-3"><FormControl placeholder="Your name"></FormControl></InputGroup>
-      <Button variant="outline-dark">Login</Button>
+      <InputGroup className="mb-3" onKeyDown={submitLogin}><FormControl placeholder="Your name"></FormControl></InputGroup>
+      <Button variant="outline-dark" onClick={submitLogin}>Login</Button>
       </Col>
       <Col></Col>
       </Row>
@@ -33,7 +39,7 @@ class Login extends Component {
         
   );
 }
-}
+//}
 
 function mapStateToProps(state) {
   return { user: state.user}
