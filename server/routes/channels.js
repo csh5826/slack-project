@@ -33,6 +33,7 @@ const channels = [
 
 router.param('channel_Id', function (request, response, next, id) {
     request.channel = channels.find(channel => channel.channel_Id === id);
+    console.log(request.channel)
     next();
 });
 
