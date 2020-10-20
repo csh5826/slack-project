@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const channel_model = require('./models/channel_model')
+
+
 const channels = [
     {
         channel_Id: '101',
@@ -33,9 +36,29 @@ router.param('channel', function (request, response, next, id) {
     next();
 });
 
-router.get('/:channel', (request, response, next) => {
-    response.send(`The channel you requested is: ${request.channel.name}`);
-});
 
+//Functionality prob not correct, but wanted to get router info in place
+router.get('/:channel', (request, response, next) => {
+  response.send("welcome to channels");
+  channel_model.getChannel()
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(error => {
+    res.status(500).send(error);
+  })
+})
+
+
+router.post('/:channel', (request, response, next) => {
+    response.send("welcome to create channels");
+    channel_model.createChannel()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+  })
 
 module.exports = router;
