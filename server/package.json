@@ -13,7 +13,8 @@
   "author": "COHORT X",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/csh5826/slack-project/issues"
+    "url": "https://github.com/csh5826/slack-project/issues",
+    "proxy": "http://localhost:5000"
   },
   "homepage": "https://github.com/csh5826/slack-project#readme",
   "dependencies": {
