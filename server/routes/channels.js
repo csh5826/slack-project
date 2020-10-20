@@ -31,14 +31,14 @@ const channels = [
     }
 ]
 
-router.param('channel', function (request, response, next, id) {
+router.param('channel_Id', function (request, response, next, id) {
     request.channel = channels.find(channel => channel.channel_Id === id);
     next();
 });
 
 
 //Functionality prob not correct, but wanted to get router info in place
-router.get('/:channel', (request, response, next) => {
+router.get('/api/channel/:channel_Id', (request, response, next) => {
   response.send("welcome to channels");
   channel_model.getChannel()
   .then(response => {
@@ -50,7 +50,7 @@ router.get('/:channel', (request, response, next) => {
 })
 
 
-router.post('/:channel', (request, response, next) => {
+router.post('/api/channel/:channel_Id', (request, response, next) => {
     response.send("welcome to create channels");
     channel_model.createChannel()
     .then(response => {
