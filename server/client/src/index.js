@@ -8,7 +8,7 @@ import reducers from './reducers';
 import App from './components/App';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './App.css';
 
 const store = applyMiddleware(promise)(createStore);
 
