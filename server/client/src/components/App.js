@@ -96,6 +96,7 @@ const messageText = (event) => {
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
+
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
         {renderChat()}
@@ -126,10 +127,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps) (App);
 
-    {/* <form onSubmit={onMessageSubmit}><TextField name='message'onChange = {e => onTextChange(e)} value={state.message}label='message' /></form> */}
 
-    {/* <ListGroup.Item style={{background: 'snow'}}><b>PJ</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>WordsWords blahblah stuffftuff meaningless stuff</ListGroup.Item>
-      <ListGroup.Item style={{background: 'snow'}}><b>Jim</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>Things and other things and stuff</ListGroup.Item>
-      <ListGroup.Item style={{background: 'snow'}}><b>Daniel</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>More things than that!</ListGroup.Item>
-      <ListGroup.Item style={{background: 'snow'}}><b>Aissa</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>And nicer things.</ListGroup.Item>
-      <ListGroup.Item style={{background: 'snow'}}><b>PJ</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>So many things</ListGroup.Item> */}

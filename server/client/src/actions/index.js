@@ -2,6 +2,11 @@ import axios from "axios";
 // import { post } from "../../../routes/login";
 
 export const SET_CURRENT_USER = 'set_current_user';
+export const LOGOUT_USER = 'logout_user';
+export const FETCH_CHANNELS = 'fetch_channels';
+export const CHANGE_CHANNEL = 'change_channel';
+export const CREATE_DIRECT_CHAT = 'create_direct_chat';
+export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
 
 // doing test case version
 // export function setCurrentUser(user) {
