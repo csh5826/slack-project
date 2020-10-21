@@ -47,6 +47,14 @@ let port = process.env.PORT || 5000;
 //socketio set up
 const server = http.createServer(app);
 const io = socketio(server);
+// setting up the connection and default message actions
+io.on('connection', (socket) => {
+  console.log('new user connected')
+  socket.emit('connection', null)
+    socket.on('message', ({name, message}) => {
+      io.emit('message', {name, message })
+    })
+});
 
 server.listen(port, function () {
   console.log('Listening on port ' + port);
