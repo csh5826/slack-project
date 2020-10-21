@@ -17,8 +17,8 @@ const [chat, setChat] = useState([])
 
 // socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
 useEffect(() => {
-    io.on('message', ({name, message}) => {
-        setChat([...chat, {name, message}])
+    io.on('message', ({name, message, timestamp}) => {
+        setChat([...chat, {name, message, timestamp}])
     })
 })
 const renderChat = () => {

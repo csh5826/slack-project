@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
   console.log('new user connected')
   socket.emit('connection', null)
     socket.on('message', ({name, message}) => {
-      io.emit('message', {name, message })
+      io.emit('message', {name, message, timestamp: Date.now() })
     })
 });
 
