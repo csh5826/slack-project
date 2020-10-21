@@ -2,13 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketio = require('socket.io');
-const mysql = require('mysql');
 
-const channels = require('./routes/channels');
 const login = require('./routes/login');
-const root = require('./routes/login')
-
-// const { request } = require('express');
 
 const app = express();
 
@@ -26,9 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
 
-app.use('/api/', root);
-app.use('/api/login', login);
-app.use('/api/channels', channels);
+//"api" as the prefix to all routes is set here
+app.use('/api/', login);
 
 
 if (process.env.NODE_ENV === 'production') {
