@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import socketio from 'socket.io-client';
+import TextField from '@material-ui/core/TextField';
+import './chatbox.css'
 const server = 'http://localhost:5000/'
 
 const io = socketio(server);
@@ -38,13 +40,23 @@ const onMessageSubmit = (e) => {
 }
     
     return (
-        <div>
+        <div className='card'>
             <form onSubmit={onMessageSubmit}>
                 <h1>Messenger</h1>
                 <div className='name-field'>
-                    <div name='name' onChange = {e => onTextChange(e)} value={state.name} label='name'></div>
-                    <div name='message' onChange = {e => onTextChange(e)} value={state.message} label='message'></div>
-                </div>
+                    <TextField 
+                    name='name' 
+                    onChange = {e => onTextChange(e)} 
+                    value={state.name} 
+                    label='name'/>
+                 </div>
+                 <div className='text-field'>
+                    <TextField 
+                    name='message'
+                    onChange = {e => onTextChange(e)}
+                    value={state.message}
+                    label='message'/>
+                </div>             
                 <button>send message</button>
             </form>
 
