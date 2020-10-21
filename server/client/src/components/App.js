@@ -56,7 +56,7 @@ function App() {
 }
 
 function mapStateToProps(state) {
-  return { user: state.user}
+  return { loggedInUser: state.loggedInUser}
 }
 
 function mapDispatchToProps(dispatch) {
