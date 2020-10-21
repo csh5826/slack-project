@@ -11,12 +11,27 @@ const pool  = mysql.createPool({
   password        : 'cohortx',
   database        : 'slack-project.sql'
 });
- 
+
 //essentially a route for testing
 router.get('/api/', (request, response, next) => {
   response.send("hello from api root!");
 })
 
+//endpoint for grabbing all users
+router.get('/users', (request, response, next) => {
+
+      // Query the pool
+      pool.query('select * from users', function (error, results, fields) {
+     
+        // Handle error after the release.
+        if (error) throw error;
+
+        //send newUser to front end
+        response.send(results);
+      });
+  })
+
+//endpoint for users logging in. Adds user to DB, returns newUser w/ {Id, name, active} to front end
 router.post('/login', (request, response, next) => {
 
   //Create a new user and add them to database
@@ -33,74 +48,47 @@ router.post('/login', (request, response, next) => {
       });
   })
 
+//endpoint for retrieving all channels - use for left list bar
+router.get('/channels', (request, response, next) => {
 
+       // Query the pool
+      pool.query('select * from channels', function (error, results, fields) {
+     
+        // Handle error after the release.
+        if (error) throw error;
 
-const channels = [
-  {
-    channel_Id: '101',
-    name: "General",
-    firstUser_Id: null,
-    secondUser_Id: null
-  },
-  {
-    channel_Id: '102',
-    name: "Javascript",
-    firstUser_Id: null,
-    secondUser_Id: null
-  },
-  {
-    channel_Id: '103',
-    name: "Clark/Jim",
-    firstUser_Id: '1',
-    secondUser_Id: '3'
-  },
-  {
-    channel_Id: '104',
-    name: "Daniel/PJ",
-    firstUser_Id: '2',
-    secondUser_Id: '4'
-  }
-]
+        //send channels to front end
+        response.send(results);
+      });
+  })
 
-router.param('channel_Id', function (request, response, next, id) {
-  request.channel = channels.find(channel => channel.channel_Id === id);
-  next();
-});
-
-
-router.get('/channel/:channel_Id', (request, response, next) => {
-  response.send(`welcome to channel ${request.channel.name}`);
-  //Here we want to return a list of all the channels?
-
-  // .then(response => {
-  //   res.status(200).send(response);
-  // })
-  // .catch(error => {
-  //   res.status(500).send(error);
-  // })
+//endpoint for retrieving one channel with messages
+router.get('/channels/:channelId/messages', (request, response, next) => {
+    //query the pool
+    pool.query('select content, user_Id from messages where channel_Id = ?', request.params.channelId, function (error, results, fields){
+      if (error) throw error;
+      //send {content: <message>} to front end
+      response.send(results)
+    })
 })
 
-
-router.post('/channel/:channel_Id', (request, response, next) => {
+//How to handle "user 1 & user 2"
+router.post('/channels/:channelId', (request, response, next) => {
   response.send("welcome to create channels");
 
-  // Create the new channel, push it into database. (here we just return the channel object)
-  //let newChannel = {channel_Id: Math.random(), channelName: request.body};
-  // response.send(newChannel);
-
-
-  // .then(response => {
-  //   res.status(200).send(response);
-  // })
-  // .catch(error => {
-  //   res.status(500).send(error);
+   // Create the new channel, push it into database. 
+     let newChannel = {channel_Id: request.params.channelId, channelName: request.body.channelName};
+      
+     // Query the pool
+     pool.query('insert into channels (channel_Id, channelName) values (?, ?)', [newChannel.channel_Id, newChannel.channelName], function (error, results, fields) {
+     
+       // Handle error after the release.
+       if (error) throw error;
+     
+       //send newUser to front end
+       response.send(newUser);
+     });
 })
 
 module.exports = router;
 
-  //   .then(response => {
-  //     res.status(200).send(response);
-  //   })
-  //   .catch(error => {
-  //     res.status(500).send(error);
-  //   })
