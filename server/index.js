@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const http = require('http');
+const socketio = require('socket.io');
+
 const channels = require('./routes/channels');
 const login = require('./routes/login');
 const root = require('./routes/login')
-const http = require('http');
-const socketio = require('socket.io');
+
 // const { request } = require('express');
 
 const app = express();
@@ -23,9 +25,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
 
-app.use('/', root);
+app.use('/api/', root);
 app.use('/api/login', login);
 app.use('/api/channels', channels);
+
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
