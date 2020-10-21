@@ -10,9 +10,12 @@ const io = socketio(server);
     })  
 
 const ChatBoxTest = () => {
-const [state, setState] = useState({message: '', name: ''})
+//defining state
+const [state, setState] = useState({name: '', message: ''})
 const [chat, setChat] = useState([])
 
+
+// socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
 useEffect(() => {
     io.on('message', ({name, message}) => {
         setChat([...chat, {name, message}])
@@ -28,6 +31,7 @@ const renderChat = () => {
 
 const onTextChange = (e) => {
     setState({...state, [e.target.name]: e.target.value})
+    console.log(state)
 }
 
 const onMessageSubmit = (e) => {
@@ -49,6 +53,11 @@ const onMessageSubmit = (e) => {
                     onChange = {e => onTextChange(e)} 
                     value={state.name} 
                     label='name'/>
+                    {/* <input type='text' 
+                    onChange = {e => onTextChange(e)}
+                    value={state.name}
+                    placeholder='name'
+                    ></input> */}
                  </div>
                  <div className='text-field'>
                     <TextField 
@@ -71,3 +80,20 @@ const onMessageSubmit = (e) => {
   }
 
 export default ChatBoxTest;
+
+
+// socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
+{/* <div className='name-field'>
+<input type='text' 
+onChange = {e => onTextChange(e)}
+value={state.name}
+placeholder='name'
+></input>
+</div>
+<div className='text-field'>              
+<input type='text' 
+onChange = {e => onTextChange(e)}
+value={state.message}
+placeholder='message'
+></input>
+</div>   */}
