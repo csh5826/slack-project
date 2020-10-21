@@ -13,10 +13,12 @@ const submitLogin = (event) => {
   console.log(event.target.value);
   if (event.key === "Enter") {
     props.setCurrentUser(event.target.value);
+    //insert delay or promise here?
+    props.history.push('/');
   }
   //   
   // this.props.signin(formProps, () => {
-  //     this.props.history.push('/');
+ //     this.props.history.push('/');
   //   });
   };
   //render() {
@@ -42,7 +44,7 @@ const submitLogin = (event) => {
 //}
 
 function mapStateToProps(state) {
-  return { user: state.user}
+  return { loggedInUser: state.loggedinUser}
 }
 
 function mapDispatchToProps(dispatch) {
@@ -54,5 +56,5 @@ function mapDispatchToProps(dispatch) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps ) (Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
  

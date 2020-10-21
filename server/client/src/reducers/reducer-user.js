@@ -1,6 +1,6 @@
 import { SET_CURRENT_USER } from '../actions';
 
-const initialState = {username : null, id: null};
+const initialState = {username : 'PleaseLogIn', id: null};
 
 export default function (state = initialState, action) {
   console.log('in reducer-user');
@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
       // console.log('and will send', {username: action.payload, id: null} )
       console.log('and will send', {username: action.payload} )
       // return {username: action.payload, id: null}
-      return {username: action.payload}
+      return {username: action.payload, id: null};
     default:
       return state;
   }
