@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import socketio from 'socket.io-client';
 import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
@@ -7,9 +7,9 @@ import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 
 const server = 'http://localhost:5000/'
 
 const io = socketio(server);
-    io.on('connection', () => {
-      console.log('we are connected with the backend')
-    })  
+io.on('connection', () => {
+  console.log('we are connected with the backend')
+})  
 
 const App = (props) => {
   console.log("the props you need  ",  props);
@@ -24,6 +24,8 @@ const App = (props) => {
 const [state, setState] = useState({name: props.loggedInUser.username, message: ''})
 const [chat, setChat] = useState([])
 
+//ref hook
+const socketRef = useRef();
 
 // socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
 io.on('message', ({name, message}) => {
