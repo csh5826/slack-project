@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketio = require('socket.io');
+const mysql = require('mysql');
 
 const channels = require('./routes/channels');
 const login = require('./routes/login');
