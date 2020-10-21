@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import socketio from 'socket.io-client';
 import TextField from '@material-ui/core/TextField';
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 const server = 'http://localhost:5000/'
 
@@ -35,9 +35,22 @@ useEffect(() => {
 const renderChat = () => {
     return chat.map(({name, message}, index) => (
         <div key={index}>
-            <h3>{name}: <span>{message}</span></h3>
+            <li>{name}: <span>{message}</span></li>
         </div>
     ))
+}
+
+const messageText = (event) => {
+  console.log(`event target ${event.target.name} and value ${event.target.value}`);
+  setState({...state, message: event.target.value})
+  console.log('messageText state manipulation: ', state)
+  if (event.key === "Enter") {
+    setState({...state, message: event.target.value})
+    const {name, message} = state
+    io.emit('message', {name, message})
+    setState({message: '', name})
+    event.target.value = '';
+  };
 }
 
 const onTextChange = (e) => {
@@ -54,7 +67,7 @@ const onMessageSubmit = (e) => {
 
 }
 
-  return (
+  return ( 
     <Container fluid>
     <Row>&nbsp;</Row>
     <Row>
@@ -87,8 +100,9 @@ const onMessageSubmit = (e) => {
         {renderChat()}
       
       </ListGroup>
-    </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}><InputGroup>
-    <form onSubmit={onMessageSubmit}><TextField name='message'onChange = {e => onTextChange(e)} value={state.message}label='message' /></form>
+    </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
+      <InputGroup onKeyUp={messageText}>
+      <FormControl name='message'></FormControl>
     <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.username}</InputGroup.Text></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>
@@ -111,8 +125,9 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps) (App);
 
+    {/* <form onSubmit={onMessageSubmit}><TextField name='message'onChange = {e => onTextChange(e)} value={state.message}label='message' /></form> */}
 
-{/* <ListGroup.Item style={{background: 'snow'}}><b>PJ</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>WordsWords blahblah stuffftuff meaningless stuff</ListGroup.Item>
+    {/* <ListGroup.Item style={{background: 'snow'}}><b>PJ</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>WordsWords blahblah stuffftuff meaningless stuff</ListGroup.Item>
       <ListGroup.Item style={{background: 'snow'}}><b>Jim</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>Things and other things and stuff</ListGroup.Item>
       <ListGroup.Item style={{background: 'snow'}}><b>Daniel</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>More things than that!</ListGroup.Item>
       <ListGroup.Item style={{background: 'snow'}}><b>Aissa</b>  <i style={{color: 'lightgrey', fontSize: 'smaller'}}> time 12:34pm </i>And nicer things.</ListGroup.Item>
