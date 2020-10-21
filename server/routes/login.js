@@ -12,25 +12,28 @@ const pool  = mysql.createPool({
   database        : 'slack-project.sql'
 });
  
+//essentially a route for testing
+router.get('/api/', (request, response, next) => {
+  response.send("hello from api root!");
+})
 
 router.post('/login', (request, response, next) => {
 
-  //Create a new user and add them to database. (here we are just trying to return them)
+  //Create a new user and add them to database
    let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username, active: 1};
-    // response.send(newUser);
  
-      // Use the connection
+      // Query the pool
       pool.query('insert into users (user_Id, username, active) values (?, ?, ?)', [newUser.user_Id, newUser.name, newUser.active], function (error, results, fields) {
      
         // Handle error after the release.
         if (error) throw error;
+
+        //send newUser to front end
         response.send(newUser);
       });
   })
 
-router.get('/api/', (request, response, next) => {
-  response.send("hello from api root!");
-})
+
 
 const channels = [
   {
