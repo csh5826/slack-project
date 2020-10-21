@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketio = require('socket.io');
-
 const allRoutes = require('./routes/allRoutes');
 
 const app = express();
