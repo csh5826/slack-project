@@ -40,13 +40,14 @@ const renderChat = () => {
 
 const messageText = (event) => {
   console.log(`event target ${event.target.name} and value ${event.target.value}`);
-  setState({...state, message: event.target.value})
-  console.log('messageText state manipulation: ', state)
+  // setState({...state, message: event.target.value})
+  // console.log('messageText state manipulation: ', state)
   if (event.key === "Enter") {
+    io.emit('message', {name: props.loggedInUser.username, message: event.target.value});
     // setState({...state, message: event.target.value})
-    const {name, message} = state
-    io.emit('message', {name, message})
-    setState({message: '', name})
+    // const {name, message} = state
+    // io.emit('message', {name, message})
+    // setState({message: '', name})
     event.target.value = '';
   };
 }
