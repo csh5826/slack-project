@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/api/login', (request, response, next) => {
 
   //Create a new user and add them to database. (here we are just trying to return them)
-   let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username};
+   let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username, active: 1};
     response.send(newUser);
 
   //route to general channel page
