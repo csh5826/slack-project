@@ -105,7 +105,7 @@ const messageText = (event) => {
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={messageText}>
       <FormControl name='message'></FormControl>
-    <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.username}</InputGroup.Text></InputGroup.Append></InputGroup></div>
+    <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>
   </Container>
