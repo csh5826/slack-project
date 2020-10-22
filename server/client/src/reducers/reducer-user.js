@@ -1,6 +1,6 @@
 import { SET_CURRENT_USER } from '../actions';
 
-const initialState = {name : 'Please Log In', user_Id: null, active: 0};
+const initialState = {name : 'Please Log In', user_Id: 0, active: 0};
 
 export default function (state = initialState, action) {
   console.log('in reducer-user');

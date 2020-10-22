@@ -38,7 +38,7 @@ const postMessage = (event) => {
     console.log('post button clicked');
   };
   const logoutClicked = (event) => {
-    console.log('logout button clicked');
+    console.log('logout button clicked for ', props.loggedInUser.user_Id);
     logoutUser(props.loggedInUser.user_Id);
     console.log('logout response is: ', props.logoutUserStatus);
   };

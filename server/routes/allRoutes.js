@@ -44,11 +44,13 @@ router.post('/login', (request, response, next) => {
   //endpoint for users logging out. Changes user's active status back to 0 in db
 router.post('/logout', (request, response, next) => {
       // Query the pool
+      console.log('the logout request has ', request.body.user_Id);
+      console.log('a', typeof(request.body.user_Id));
       pool.query('update users set active = 0 where user_Id = ?', request.body.user_Id, function (error, results, fields) {
         // Handle error after the release.
         if (error) throw error;
-        //send logged out user to front end as confirmation
-        response.send(request.body.user_Id);
+       let goodUser = request.body.user_Id; //send logged out user to front end as confirmation
+        response.send(goodUser);
       });
   })
 

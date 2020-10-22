@@ -3,6 +3,7 @@ import axios from "axios";
 export const SET_CURRENT_USER = 'set_current_user';
 export const LOGOUT_USER = 'logout_user';
 export const FETCH_CHANNELS = 'fetch_channels';
+export const FETCH_CHANNEL_MESSAGES = "fetch_channel_messages";
 export const CHANGE_CHANNEL = 'change_channel';
 export const CREATE_DIRECT_CHAT = 'create_direct_chat';
 export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
@@ -20,7 +21,8 @@ export function setCurrentUser(user) {
 }
 
 export function logoutUser(theId) {
-
+  console.log('about to logout user', theId);
+  theId = theId.toString();
   const res = axios.post(`${ROOT_URL}/logout`, {user_Id: theId});
   console.log('received from server-logout: ', res)
   return { type: LOGOUT_USER, payload: res}
