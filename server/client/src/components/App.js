@@ -68,7 +68,7 @@ const messageText = (event) => {
   // setState({...state, message: event.target.value})
   // console.log('messageText state manipulation: ', state)
   if (event.key === "Enter") {
-    io.emit('message', {name: props.loggedInUser.username, message: event.target.value});
+    io.emit('message', {name: props.loggedInUser.name, message: event.target.value});
     // setState({...state, message: event.target.value})
     // const {name, message} = state
     // io.emit('message', {name, message})
