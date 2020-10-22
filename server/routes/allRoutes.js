@@ -76,9 +76,9 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
     console.log(`getting group messages for channel ${request.params.channelId}`);
     pool.query('select content, user_Id from messages where channel_Id = ?', request.params.channelId, function (error, results, fields){
     if (error) throw error;
-    console.log(results[0])
+    console.log(results)
     //send {content: <message>} to front end
-    response.send(results[0])
+    response.send(results)
   })
 })
 

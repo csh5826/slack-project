@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { setState, useState, useRef, useEffect } from "react";
 // import socketio from 'socket.io-client';
 import { connect } from "react-redux";
@@ -10,107 +10,110 @@ import { fetchChannelMessages } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import SideBar from './SideBar';
+import { render } from 'react-dom';
 
 // window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
 
-const App = (props) => {
+class App extends Component {
+// const App = (props) => {
   //defining state ///
-let setup = 0;
 
-const [state, setState] = useState({name: props.loggedInUser.name, message: ''})
-const [chat, setChat] = useState([])
+  componentDidMount(){
+      // const [state, setState] = useState({name: this.props.loggedInUser.name, message: ''})
+      // const [chat, setChat] = useState([])
+      
+      
+      
+      if (this.props.loggedInUser.user_Id === 0) {
+        //props.history.push('/login');
+      }
+      //fill the store //
+      this.props.fetchChannels();
+      this.props.fetchChannelMessages(101);
+      this.props.fetchUsers();
 
-  console.log('before  fetch avail channels: ', props.availableChannels);
-  console.log('before  fetch online users: ', props.onlineUsers);
-  console.log("the props you need  ",  props);
-  // TODO add conditional to check if user is logged in....then:
-  if (props.loggedInUser.user_Id === 0) {
-    //props.history.push('/login');
-    
-  }
-if (props.availableChannels.channel_Id === [])  {
-  console.log("here I am, fetching channels");
-  props.fetchChannels();
-  props.fetchChannelMessages(101);
-};
-if (props.channelMessages === []) {
-  console.log("here I am, fetching messages");
-props.fetchChannelMessages(101);
-};
-if (props.onlineUsers === []) {
-  console.log("here I am, fetching users");
-  props.fetchUsers();
-};
+      console.log('after fetch avail channels: ', this.props.availableChannels);
+      console.log('after fetch online users: ', this.props.onlineUsers);
+      console.log('after fetch channel messages: ', this.props.channelMessages);
 
-console.log('after fetch avail channels: ', props.availableChannels);
-console.log('after fetch online users: ', props.onlineUsers);
-console.log('after fetch channel messages: ', props.channelMessages);
-  
+      console.log("App.js props are ",  this.props);
+    }
 
 
-  const logoutClicked = (event) => {
-    console.log('logout button clicked for ', props.loggedInUser.user_Id);
-    props.logoutUser(props.loggedInUser.user_Id);
-    console.log('logout response is: ', props.logoutUserStatus);
+logoutClicked = (event) => {
+    console.log('logout button clicked for ', this.props.loggedInUser.user_Id);
+    this.sendMessageprops.logoutUser(this.props.loggedInUser.user_Id);
+    console.log('logout response is: ', this.props.logoutUserStatus);
   };
 
-// TO DO 
-const renderChat = () => {  
-  return chat.map(({name, message}, index) => (
-      <div key={index}>
-          <li>{name}: <span>{message}</span></li>
-      </div>
-  ))
-}
+// TO DO as a separate component?
 
-const messageText = (event) => {
+// renderChat = () => {  
+//   return chat.map(({name, message}, index) => (
+//       <div key={index}>
+//           <li>{name}: <span>{message}</span></li>
+//       </div>
+//   ))
+// }
 
-  setState({...state, message: event.target.value});  // for to make button work
+messageText = (event) => {
+
+  // setState({...this.state, message: event.target.value});  // for to make button work// make regular var?
   
   if (event.key === "Enter") {
-    setState({...state, message: event.target.value});  // for to make button work
-    props.sendMessage(props.loggedInUser.user_Id, 101, event.target.value);
-    console.log('the send message return', props.sentMessage);
+    // setState({...this.state, message: event.target.value});  // for to make button work // make regular var?
+    this.props.sendMessage(this.props.loggedInUser.user_Id, 101, event.target.value);
+    console.log('the send message return', this.props.sentMessage);
     //TODO - add to chat
-    let name = {name : props.loggedInUser.name};
-    let message = {message : event.target.value };
+    // let name = {name : props.loggedInUser.name};
+    // let message = {message : event.target.value };
     // setChat([...chat, {name, message}])
     event.target.value='';
   };
 }
-const postMessage = () => {
+postMessage = () => {
   console.log('post fake-button clicked');
-  props.sendMessage(props.loggedInUser.user_Id, 101, state.message);
+  this.props.sendMessage(this.props.loggedInUser.user_Id, 101, this.state.message);
+  this.props.fetchChannelMessages(101);
   //form["message"].value = '';
   //todo clear field; above line doesn't work
 };
 
+tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
+      return (
+          <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
+      )
+  });
+  return aChat;
+}
+render() {
   return ( 
     <Container fluid>
     <Row>&nbsp;</Row>
     <Row>
       <SideBar/>
     <Col sm={9}>
-    <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
+    <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
 
     
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
-        {renderChat()}
+        {/* {this.renderChat()} */}
+        {this.tempRenderChat()}
       </ListGroup>
 
 
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
-      <InputGroup onKeyUp={messageText}>
+      <InputGroup onKeyUp={this.messageText}>
       <FormControl name='message' id='messageId'></FormControl>
-    <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
+    <InputGroup.Append><InputGroup.Text onClick={this.postMessage}>{this.props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>
   </Container>
   
-  );
+  )};
 }
 
 function mapStateToProps(state) {

@@ -13,12 +13,12 @@ class SideBar extends Component {
         console.log('something should log')
         this.props.fetchChannels();
         this.props.fetchUsers();
-        this.props.fetchChannelMessages(101);
+        // this.props.fetchChannelMessages(101);
     }
 
     //renders all channels
     renderChannelGroup() {
-        console.log('props are', this.props.availableChannels);
+        console.log('SideBar props are', this.props.availableChannels);
         let channels = this.props.availableChannels.map(channel => {
             return (
                 <ListGroup.Item action>{channel.channelName}</ListGroup.Item>
@@ -69,7 +69,7 @@ function mapDispatchToProps(dispatch) {
         {
             fetchChannels,
             fetchUsers,
-            fetchChannelMessages
+            // fetchChannelMessages
         },
         dispatch
     );
