@@ -1,5 +1,6 @@
 import { FETCH_CHANNELS } from '../actions';
 
+
 const initialState =    [];
 
 export default function (state = initialState, action) {

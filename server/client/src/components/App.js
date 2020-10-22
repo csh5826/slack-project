@@ -8,6 +8,7 @@ import { logoutUser } from '../actions';
 import { sendMessage } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+import SideBar from './SideBar'
 
 // window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
@@ -75,28 +76,7 @@ const postMessage = () => {
     <Container fluid>
     <Row>&nbsp;</Row>
     <Row>
-      <Col sm={3}>
-      <div className="channels-list" style={{background: 'azure', height: 'auto'}}>
-        <ListGroup variant="flush">
-          <ListGroup.Item variant="success"><b>Channels</b></ListGroup.Item>
-          <ListGroup.Item action>General</ListGroup.Item>
-          <ListGroup.Item action>Javascript</ListGroup.Item>
-          <ListGroup.Item action>Clark/Jim</ListGroup.Item>
-          <ListGroup.Item action>Daniel/PJ</ListGroup.Item>
-          <ListGroup.Item>&nbsp;</ListGroup.Item>
-        </ListGroup></div>
-        
-      <div className="users-list" style={{background: 'antiquewhite', height: 'auto'}}>
-        <ListGroup variant="flush">
-          <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
-          <ListGroup.Item action>PJ</ListGroup.Item>
-          <ListGroup.Item action>Clark</ListGroup.Item>
-          <ListGroup.Item action>Aissa</ListGroup.Item>
-          <ListGroup.Item action>Jim</ListGroup.Item>
-          <ListGroup.Item action>Daniel</ListGroup.Item>
-      </ListGroup> </div>
-      
-      </Col>
+      <SideBar/>
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
