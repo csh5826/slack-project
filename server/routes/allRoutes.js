@@ -35,11 +35,13 @@ router.post('/login', (request, response, next) => {
 
      let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username, active: 1};
      // Query the pool
-      pool.query('insert into users (user_Id, username, active) values (?, ?, ?)', [newUser.user_Id, newUser.name, newUser.active], function (error, results, fields) {
+      pool.query('insert into users (user_Id, username, active, timestamp) values (?, ?, ?, CURRENT_TIMESTAMP)', [newUser.user_Id, newUser.name, newUser.active], function (error, results, fields) {
       // Handle error after the release.
       if (error) throw error;
-      //send newUser to front end
-      response.send(newUser);
+      pool.query('select user_Id, username, active, timestamp from users where user_Id = ?', newUser.user_Id, function(error, results, fields) {
+      if (error) throw error;
+      response.send(results);
+    })
     });
   
   })
@@ -50,10 +52,10 @@ router.post('/logout', (request, response, next) => {
       console.log('the logout request has ', request.body.user_Id);
       console.log('a', typeof(request.body.user_Id));
       pool.query('update users set active = 0 where user_Id = ?', request.body.user_Id, function (error, results, fields) {
-        // Handle error after the release.
-        if (error) throw error;
-       let goodUser = request.body.user_Id; //send logged out user to front end as confirmation
-        response.send(goodUser);
+      // Handle error after the release.
+      if (error) throw error;
+      let goodUser = request.body.user_Id; //send logged out user to front end as confirmation
+      response.send(goodUser);
       });
   })
 
@@ -66,7 +68,7 @@ router.get('/channels', (request, response, next) => {
       //send channels to front end
       response.send(results);
     });
-  })
+})
 
 //endpoint for retrieving one channel with messages
 router.get('/channels/:channelId/messages', (request, response, next) => {
@@ -84,13 +86,14 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
      // Query the pool
-     pool.query('insert into messages (message_Id, channel_Id, user_Id, content) values (?, ?, ?, ?)', [newMessage.message_Id, newMessage.channel_Id, newMessage.user_Id, newMessage.content], function (error, results, fields) {
+     pool.query('insert into messages (message_Id, channel_Id, user_Id, content, timestamp) values (?, ?, ?, ?, CURRENT_TIMESTAMP)', [newMessage.message_Id, newMessage.channel_Id, newMessage.user_Id, newMessage.content], function (error, results, fields) {
      // Handle error after the release.
      if (error) throw error;
-     //send newUser to front end
-     response.send(newUser);
+     pool.query('select message_Id, channel_Id, content, user_Id, timestamp from messages where message_Id = ?', newMessage.message_Id, function(error, results, fields) {
+     if (error) throw error;
+     response.send(results);
+     })
   });
-
 })
 
 //endpoint to create a new channel. How to handle "user 1 & user 2"
@@ -103,7 +106,7 @@ router.post('/channels/:channelId', (request, response, next) => {
      // Handle error after the release.
      if (error) throw error;
      //send newUser to front end
-     response.send(newUser);
+     response.send(newChannel);
   });
 })
 
