@@ -40,7 +40,7 @@ router.post('/login', (request, response, next) => {
       if (error) throw error;
       pool.query('select user_Id, username, active, timestamp from users where user_Id = ?', newUser.user_Id, function(error, results, fields) {
       if (error) throw error;
-      response.send(results);
+      response.send(results[0]);
     })
     });
   
@@ -82,9 +82,7 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
-
   if (!request.body.content) console.log(`create message with ${request.body.content} and userid ${request.body.user_Id} and channel ${request.params.channelId}`);
-
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
      // Query the pool
@@ -93,7 +91,7 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
      if (error) throw error;
      pool.query('select message_Id, channel_Id, content, user_Id, timestamp from messages where message_Id = ?', newMessage.message_Id, function(error, results, fields) {
      if (error) throw error;
-     response.send(results);
+     response.send(results)[0];
      })
   });
 })
