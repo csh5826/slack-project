@@ -57,6 +57,10 @@ const messageText = (event) => {
     setState({...state, message: event.target.value});  // for to make button work
     props.sendMessage(props.loggedInUser.user_Id, 101, event.target.value);
     console.log('the send message return', props.sentMessage);
+    //TODO - add to chat
+    let name = {name : props.loggedInUser.name};
+    let message = {message : event.target.value };
+    // setChat([...chat, {name, message}])
     event.target.value='';
   };
 }

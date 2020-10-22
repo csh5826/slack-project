@@ -1,9 +1,6 @@
 import { FETCH_CHANNELS } from '../actions';
 
-const initialState =    {channel_Id: 0,
-channelName: 'Offline',
-firstUser_Id: null,
-secondUser_Id: null};
+const initialState =    [];
 
 export default function (state = initialState, action) {
   console.log('in reducer-fetch-channels');
