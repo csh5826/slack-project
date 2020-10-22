@@ -6,6 +6,7 @@ export const FETCH_CHANNELS = 'fetch_channels';
 export const CHANGE_CHANNEL = 'change_channel';
 export const CREATE_DIRECT_CHAT = 'create_direct_chat';
 export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
+export const FETCH_USERS = 'fetch_users';
 
 const ROOT_URL = 'http://localhost:5000/api'
 
@@ -27,8 +28,14 @@ export function fetchChannels() {
 
 }
 
+export function fetchUsers() {
 
-
+  const res = axios.get(`${ROOT_URL}/users`);
+  console.log('received from server-users: ', res.data)
+  return { type: FETCH_USERS, payload: res}
+////
+}
+ 
 // junk drawer
 // axios({
 //   method: 'post',
