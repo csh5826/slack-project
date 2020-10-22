@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
 import { fetchUsers } from '../actions';
+import { fetchChannelMessages} from '../actions';
 import { bindActionCreators } from "redux";
 import { ListGroup, Col } from 'react-bootstrap';
 import _ from 'lodash';
@@ -12,6 +13,7 @@ class SideBar extends Component {
         console.log('something should log')
         this.props.fetchChannels();
         this.props.fetchUsers();
+        this.props.fetchChannelMessages(101);
     }
 
     //renders all channels
@@ -66,7 +68,8 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
             fetchChannels,
-            fetchUsers
+            fetchUsers,
+            fetchChannelMessages
         },
         dispatch
     );

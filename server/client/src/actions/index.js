@@ -56,6 +56,14 @@ export function fetchUsers() {
 
 }
  
+export function fetchChannelMessages(channel_Id) {
+  console.log(`channel messages with: ${ROOT_URL}/channels/${channel_Id}/messages`);
+  const res = axios.get(`${ROOT_URL}/channels/${channel_Id}/messages`);
+  console.log('received from channel messages: ', res.data)
+  return { type: FETCH_CHANNEL_MESSAGES, payload: res}
+
+}
+
 // junk drawer
 // axios({
 //   method: 'post',

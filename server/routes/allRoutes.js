@@ -7,8 +7,8 @@ const mysql = require('mysql');
 const pool  = mysql.createPool({
   connectionLimit : 10,
   host            : 'localhost',
-  user            : 'clark',
-  password        : 'g0thers@',
+  user            : 'aissa',
+  password        : 'cohortx',
   database        : 'slack-project.sql'
 });
 
@@ -73,10 +73,12 @@ router.get('/channels', (request, response, next) => {
 //endpoint for retrieving one channel with messages
 router.get('/channels/:channelId/messages', (request, response, next) => {
     //query the pool
+    console.log(`getting group messages for channel ${request.params.channelId}`);
     pool.query('select content, user_Id from messages where channel_Id = ?', request.params.channelId, function (error, results, fields){
     if (error) throw error;
+    console.log(results[0])
     //send {content: <message>} to front end
-    response.send(results)
+    response.send(results[0])
   })
 })
 
