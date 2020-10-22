@@ -47,16 +47,26 @@ let port = process.env.PORT || 5000;
 //socketio set up
 const server = http.createServer(app);
 const io = socketio(server);
-// setting up the connection and default message event
+
+// setting up the connection event
 io.on('connection', (socket) => {
   console.log('new user connected')
-  // socket.emit('connection', null)
+  // once connected all users pushed into general room by default
+  socket.on('room', (room) => {
+    socket.join(room);
+  })
+// room needs to be data.roomId from server
+let room = 'general'
+  //emmit the message in correct room
   socket.on('message', ({name, message}) => {
     console.log('received a message')
-    io.emit('message', {name, message })
+    io.sockets.in(room).emit('message', {name, message })
   })
 });
 
+// when room is joined, query DB to update that room with the user id etc
+
+// when message sent, query db to save message data into
 
 server.listen(port, function () {
   console.log('Listening on port ' + port);

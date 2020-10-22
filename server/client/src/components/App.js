@@ -7,9 +7,14 @@ import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 
 const server = 'http://localhost:5000/'
 
 const io = socketio(server);
+//default room
+let room = 'general'
 io.on('connection', () => {
   console.log('we are connected with the backend')
+  io.emit('room', room)
 })  
+
+
 
 const App = (props) => {
   console.log("the props you need  ",  props);
@@ -42,7 +47,7 @@ const renderChat = () => {
 
 const messageText = (event) => {
   console.log(`event target ${event.target.name} and value ${event.target.value}`);
-  // setState({...state, message: event.target.value})
+  // // setState({...state, message: event.target.value})
   // console.log('messageText state manipulation: ', state)
   if (event.key === "Enter") {
     io.emit('message', {name: props.loggedInUser.username, message: event.target.value});
