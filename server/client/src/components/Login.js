@@ -14,7 +14,7 @@ const submitLogin = (event) => {
   if (event.key === "Enter") {
     props.setCurrentUser(event.target.value);
     //insert delay or promise here?
-    props.history.push('/');
+    setTimeout(props.history.push('/'), 1500);
   }
   //   
   // this.props.signin(formProps, () => {

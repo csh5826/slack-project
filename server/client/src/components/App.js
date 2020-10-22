@@ -1,19 +1,20 @@
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
-import socketio from 'socket.io-client';
+// import socketio from 'socket.io-client';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
 import { fetchUsers } from '../actions';
 import { logoutUser } from '../actions';
+import { sendMessage } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 const server = 'http://localhost:5000/'
-
-const io = socketio(server);
-io.on('connection', () => {
-  console.log('we are connected with the backend')
-})  
+// TODO sockets
+// const io = socketio(server);
+// io.on('connection', () => {
+//   console.log('we are connected with the backend')
+// })  
 
 const App = (props) => {
   let checkChannels = [1];
@@ -21,6 +22,9 @@ const App = (props) => {
   console.log('before  fetch online users: ', props.onlineUsers);
   console.log("the props you need  ",  props);
   // TODO add conditional to check if user is logged in....then:
+  if (props.loggedInUser.user_Id === 0) {
+    props.history.push('/login');
+  }
 if (props.availableChannels.channel_Id === 0) {
   props.fetchChannels();
   props.fetchUsers();
@@ -49,34 +53,45 @@ const [chat, setChat] = useState([])
 
 //ref hook
 const socketRef = useRef();
-
+// TODO
 // socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
-io.on('message', ({name, message}) => {
-  setChat([...chat, {name, message}])
-})
+// io.on('message', ({name, message}) => {
+//   setChat([...chat, {name, message}])
+// })
+// renderChat sockets version
+// const renderChat = () => {
+//     return chat.map(({name, message}, index) => (
+//         <div key={index}>
+//             <li>{name}: <span>{message}</span></li>
+//         </div>
+//     ))
+// }
 
-const renderChat = () => {
-    return chat.map(({name, message}, index) => (
-        <div key={index}>
-            <li>{name}: <span>{message}</span></li>
-        </div>
-    ))
+// renderChat api version
+const renderChat = () => {  
+  return chat.map(({name, message}, index) => (
+      <div key={index}>
+          <li>{name}: <span>{message}</span></li>
+      </div>
+  ))
 }
 
 const messageText = (event) => {
-  console.log(`event target ${event.target.name} and value ${event.target.value}`);
-  // setState({...state, message: event.target.value})
-  // console.log('messageText state manipulation: ', state)
+  // console.log(`event target ${event.target.name} and value ${event.target.value}`);
+  setState({...state, message: event.target.value});  // for to make button work
+  
   if (event.key === "Enter") {
-    io.emit('message', {name: props.loggedInUser.name, message: event.target.value});
-    // setState({...state, message: event.target.value})
-    // const {name, message} = state
-    // io.emit('message', {name, message})
-    // setState({message: '', name})
+    setState({...state, message: event.target.value});  // for to make button work
+    // sockets version code on line below
+    // io.emit('message', {name: props.loggedInUser.name, message: event.target.value});
+    // sending message via API. 
+    //  **** Hardcoded for channel 101 right now ****
+    sendMessage(props.loggedInUser.user_Id, 101, event.target.value);
+    console.log('the send message return', props.sentMessage);
     event.target.value = '';
   };
 }
-
+//
 // const onTextChange = (e) => {
 //     setState({...state, [e.target.name]: e.target.value})
 //     console.log(state)
@@ -141,7 +156,8 @@ function mapStateToProps(state) {
     loggedInUser: state.loggedInUser,
     availableChannels: state.availableChannels,
     onlineUsers: state.onlineUsers,
-    logoutUserStatus: state.logoutUserStatus
+    logoutUserStatus: state.logoutUserStatus,
+    sentMessage: state.sentMessage
   }
 }
 
@@ -150,7 +166,8 @@ function mapDispatchToProps(dispatch) {
     {
       fetchChannels,
       fetchUsers,
-      logoutUser
+      logoutUser,
+      sendMessage
     },
     dispatch
   );

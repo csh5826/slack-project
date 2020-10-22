@@ -80,6 +80,7 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
+  console.log(`create message with ${request.body.content} and userid ${request.body.user_Id} and channel ${request.params.channelId}`);
   if (!request.body.content) {alert ("Please add a message")} 
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
@@ -88,7 +89,7 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
      // Handle error after the release.
      if (error) throw error;
      //send newUser to front end
-     response.send(newUser);
+     response.send(newMessage);
   });
 
 })
