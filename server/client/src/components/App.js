@@ -120,11 +120,14 @@ const messageText = (event) => {
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
 
+    
+    //MAKE INTO COMPONENT
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
         {renderChat()}
-      
       </ListGroup>
+
+
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={messageText}>
       <FormControl name='message'></FormControl>

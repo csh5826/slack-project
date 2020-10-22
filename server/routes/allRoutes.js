@@ -31,7 +31,7 @@ router.get('/users', (request, response, next) => {
 //endpoint for users logging in. Adds user to DB, returns newUser w/ {Id, name, active} to front end
 router.post('/login', (request, response, next) => {
   //Create a new user and add them to database
-  if (!request.body.username) {alert ("Please add a username")}; 
+  if (!request.body.username) {console.log ("Please add a username")}; 
 
      let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username, active: 1};
      // Query the pool
@@ -82,7 +82,7 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
-  if (!request.body.content) {alert ("Please add a message")} 
+  if (!request.body.content) {console.log ("Please add a message")} 
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
      // Query the pool
@@ -96,17 +96,25 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
   });
 })
 
-//endpoint to create a new channel. How to handle "user 1 & user 2"
-router.post('/channels/:channelId', (request, response, next) => {
-  response.send("welcome to create channels");
-     // Create the new channel, push it into database. 
-     let newChannel = {channel_Id: request.params.channelId, channelName: request.body.channelName};
+//endpoint to create a new channel/conversation
+router.post('/channels', (request, response, next) => {
+     //If a channelName is submitted, use it. Otherwise, name the channel for users.
+     let newChannelName  = '';
+     if (request.body.channelName) {
+       newChannelName = request.body.channelName
+     } else {
+       newChannelName = `${request.body.firstUserId}/${request.body.secondUserId}`;
+     }
+     //define the new channel's parameters
+     let newChannel = {channel_Id: Math.floor(Math.random()*50000), channelName: newChannelName, firstUser_Id: request.body.firstUserId, secondUser_Id: request.body.secondUserId};
      // Query the pool
-     pool.query('insert into channels (channel_Id, channelName) values (?, ?)', [newChannel.channel_Id, newChannel.channelName], function (error, results, fields) {
-     // Handle error after the release.
+     pool.query('insert into channels (channel_Id, channelName, firstUser_Id, secondUser_Id) values (?, ?, ?, ?)', [newChannel.channel_Id, newChannel.channelName, newChannel.firstUser_Id, newChannel.secondUser_Id], function (error, results, fields) {
      if (error) throw error;
+     //select the new channel and return it
+     pool.query('select channel_Id, channelName, firstUser_Id, secondUser_Id from channels where channel_Id = ?', newChannel.channel_Id, function (error, results, fields) {
      //send newUser to front end
-     response.send(newChannel);
+     response.send(results);
+     })
   });
 })
 
