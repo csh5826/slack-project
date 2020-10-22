@@ -19,6 +19,14 @@ export function setCurrentUser(user) {
 
 }
 
+export function logoutUser(theId) {
+
+  const res = axios.post(`${ROOT_URL}/logout`, {user_Id: theId});
+  console.log('received from server-logout: ', res)
+  return { type: LOGOUT_USER, payload: res}
+
+}
+
 // fetch current channels
 export function fetchChannels() {
 
@@ -33,7 +41,7 @@ export function fetchUsers() {
   const res = axios.get(`${ROOT_URL}/users`);
   console.log('received from server-users: ', res.data)
   return { type: FETCH_USERS, payload: res}
-////
+
 }
  
 // junk drawer

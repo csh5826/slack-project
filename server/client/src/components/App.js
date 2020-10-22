@@ -2,8 +2,9 @@ import React from 'react';
 import { useState, useRef, useEffect } from "react";
 import socketio from 'socket.io-client';
 import { connect } from "react-redux";
-import { fetchChannels } from '../actions'
-import { fetchUsers } from '../actions'
+import { fetchChannels } from '../actions';
+import { fetchUsers } from '../actions';
+import { logoutUser } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
@@ -31,11 +32,15 @@ if (props.availableChannels.channel_Id === 0) {
 };
 console.log('after fetch avail channels: ', props.availableChannels);
 console.log('after fetch online users: ', props.onlineUsers);
-  const postMessage = (event) => {
+  
+
+const postMessage = (event) => {
     console.log('post button clicked');
   };
   const logoutClicked = (event) => {
     console.log('logout button clicked');
+    logoutUser(props.loggedInUser.user_Id);
+    console.log('logout response is: ', props.logoutUserStatus);
   };
 
 //defining state
@@ -135,14 +140,17 @@ function mapStateToProps(state) {
   return { 
     loggedInUser: state.loggedInUser,
     availableChannels: state.availableChannels,
-    onlineUsers: state.onlineUsers}
+    onlineUsers: state.onlineUsers,
+    logoutUserStatus: state.logoutUserStatus
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       fetchChannels,
-      fetchUsers
+      fetchUsers,
+      logoutUser
     },
     dispatch
   );

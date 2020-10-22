@@ -47,8 +47,8 @@ router.post('/logout', (request, response, next) => {
       pool.query('update users set active = 0 where user_Id = ?', request.body.user_Id, function (error, results, fields) {
         // Handle error after the release.
         if (error) throw error;
-        //send newUser to front end
-        response.send(newUser);
+        //send logged out user to front end as confirmation
+        response.send(request.body.user_Id);
       });
   })
 
