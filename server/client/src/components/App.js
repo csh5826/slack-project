@@ -9,6 +9,7 @@ import { sendMessage } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
+// window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
 
 const App = (props) => {
@@ -56,12 +57,14 @@ const messageText = (event) => {
     setState({...state, message: event.target.value});  // for to make button work
     props.sendMessage(props.loggedInUser.user_Id, 101, event.target.value);
     console.log('the send message return', props.sentMessage);
-    event.target.value = '';
+    event.target.value='';
   };
 }
 const postMessage = () => {
   console.log('post fake-button clicked');
   props.sendMessage(props.loggedInUser.user_Id, 101, state.message);
+  //form["message"].value = '';
+  //todo clear field; above line doesn't work
 };
 
   return ( 
@@ -103,7 +106,7 @@ const postMessage = () => {
 
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={messageText}>
-      <FormControl name='message'></FormControl>
+      <FormControl name='message' id='messageId'></FormControl>
     <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>
