@@ -9,10 +9,12 @@ import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 const server = 'http://localhost:5000/'
-
 const io = socketio(server);
-io.on('connection', () => {
+let roomId = 1
+io.on('connect', () => {
   console.log('we are connected with the backend')
+  console.log('the room id is', roomId)
+  io.emit('join-room', roomId)
 })  
 
 const App = (props) => {

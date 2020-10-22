@@ -43,12 +43,16 @@ let port = process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = socketio(server);
 // setting up the connection and default message event
-io.on('connection', (socket) => {
+io.on('connect', (socket) => {
   console.log('new user connected')
   // socket.emit('connection', null)
+  socket.on('join-room', (room) => {
+    socket.join(room)
+  })
   socket.on('message', ({name, message}) => {
     console.log('received a message')
-    io.emit('message', {name, message })
+    console.log(socket.id)
+    io.in(room).emit('message', {name, message })
   })
 });
 
