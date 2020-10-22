@@ -82,7 +82,9 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
-  if (!request.body.content) {console.log ("Please add a message")} 
+
+  if (!request.body.content) console.log(`create message with ${request.body.content} and userid ${request.body.user_Id} and channel ${request.params.channelId}`);
+
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
      // Query the pool

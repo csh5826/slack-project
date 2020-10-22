@@ -8,6 +8,7 @@ export const CHANGE_CHANNEL = 'change_channel';
 export const CREATE_DIRECT_CHAT = 'create_direct_chat';
 export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
 export const FETCH_USERS = 'fetch_users';
+export const SEND_MESSAGE = 'send_message';
 
 const ROOT_URL = 'http://localhost:5000/api'
 
@@ -29,6 +30,15 @@ export function logoutUser(theId) {
 
 }
 
+// post a new message
+export function sendMessage(user_Id, channel, message) {
+user_Id = user_Id.toString();
+channel = channel.toString();
+  const res = axios.post(`${ROOT_URL}/channels/${channel}/messages`, {user_Id: user_Id, content: message});
+  console.log('received from server-send-message ', res)
+  return { type: SEND_MESSAGE, payload: res}
+
+}
 // fetch current channels
 export function fetchChannels() {
 
