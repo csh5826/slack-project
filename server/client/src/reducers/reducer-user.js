@@ -8,7 +8,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
       console.log("setCurrentUser reducer has ", action.payload.data);
-      return {name: action.payload.data.name, 
+      return {name: action.payload.data.username, 
         user_Id: action.payload.data.user_Id, 
         active: action.payload.data.active}
     default:

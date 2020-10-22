@@ -91,7 +91,7 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
      if (error) throw error;
      pool.query('select message_Id, channel_Id, content, user_Id, timestamp from messages where message_Id = ?', newMessage.message_Id, function(error, results, fields) {
      if (error) throw error;
-     response.send(results)[0];
+     response.send(results[0]);
      })
   });
 })

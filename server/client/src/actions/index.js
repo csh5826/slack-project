@@ -8,7 +8,7 @@ export const CHANGE_CHANNEL = 'change_channel';
 export const CREATE_DIRECT_CHAT = 'create_direct_chat';
 export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
 export const FETCH_USERS = 'fetch_users';
-export const SEND_MESSAGE = 'send_message';
+export const SEND_A_MESSAGE = 'send_a_message';
 
 const ROOT_URL = 'http://localhost:5000/api'
 
@@ -16,10 +16,10 @@ const ROOT_URL = 'http://localhost:5000/api'
 export function setCurrentUser(user) {
 
   const res = axios.post(`${ROOT_URL}/login`, {username: user});
-  console.log('received from server-login: ', res.data)
+  console.log('received from server-login: ', res)
   return { type: SET_CURRENT_USER, payload: res}
 
-}
+}//
 
 export function logoutUser(theId) {
   console.log('about to logout user', theId);
@@ -36,7 +36,7 @@ user_Id = user_Id.toString();
 channel = channel.toString();
   const res = axios.post(`${ROOT_URL}/channels/${channel}/messages`, {user_Id: user_Id, content: message});
   console.log('received from server-send-message ', res)
-  return { type: SEND_MESSAGE, payload: res}
+  return { type: SEND_A_MESSAGE, payload: res}
 
 }
 // fetch current channels

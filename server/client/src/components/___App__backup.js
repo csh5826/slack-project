@@ -1,5 +1,5 @@
 import React from 'react';
-import { setState, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 // import socketio from 'socket.io-client';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
@@ -8,16 +8,16 @@ import { logoutUser } from '../actions';
 import { sendMessage } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
-import SideBar from './SideBar'
 
-// window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
+// TODO sockets
+// const io = socketio(server);
+// io.on('connection', () => {
+//   console.log('we are connected with the backend')
+// })  
 
 const App = (props) => {
-  //defining state
-const [state, setState] = useState({name: props.loggedInUser.name, message: ''})
-const [chat, setChat] = useState([])
-
+  let checkChannels = [1];
   console.log('before  fetch avail channels: ', props.availableChannels);
   console.log('before  fetch online users: ', props.onlineUsers);
   console.log("the props you need  ",  props);
@@ -28,20 +28,46 @@ const [chat, setChat] = useState([])
 if (props.availableChannels.channel_Id === 0) {
   props.fetchChannels();
   props.fetchUsers();
+  //.then(
+  // console.log(props.availableChannels);
+  // console.log(props.onlineUsers);
 
+  // return availableChannels
 };
 console.log('after fetch avail channels: ', props.availableChannels);
 console.log('after fetch online users: ', props.onlineUsers);
   
 
-
+const postMessage = (event) => {
+    console.log('post button clicked');
+  };
   const logoutClicked = (event) => {
     console.log('logout button clicked for ', props.loggedInUser.user_Id);
-    props.logoutUser(props.loggedInUser.user_Id);
+    logoutUser(props.loggedInUser.user_Id);
     console.log('logout response is: ', props.logoutUserStatus);
   };
 
-// TO DO 
+//defining state
+const [state, setState] = useState({name: props.loggedInUser.name, message: ''})
+const [chat, setChat] = useState([])
+
+//ref hook
+const socketRef = useRef();
+// TODO
+// socket listening for our message action, setchat is pulling all previous chat and making sure it is displayed
+// io.on('message', ({name, message}) => {
+//   setChat([...chat, {name, message}])
+// })
+// renderChat sockets version
+// const renderChat = () => {
+//     return chat.map(({name, message}, index) => (
+//         <div key={index}>
+//             <li>{name}: <span>{message}</span></li>
+//         </div>
+//     ))
+// }
+
+// renderChat api version
 const renderChat = () => {  
   return chat.map(({name, message}, index) => (
       <div key={index}>
@@ -51,46 +77,72 @@ const renderChat = () => {
 }
 
 const messageText = (event) => {
-
+  // console.log(`event target ${event.target.name} and value ${event.target.value}`);
   setState({...state, message: event.target.value});  // for to make button work
   
   if (event.key === "Enter") {
     setState({...state, message: event.target.value});  // for to make button work
+    // sockets version code on line below
+    // io.emit('message', {name: props.loggedInUser.name, message: event.target.value});
+    // sending message via API. 
+    //  **** Hardcoded for channel 101 right now ****
     props.sendMessage(props.loggedInUser.user_Id, 101, event.target.value);
     console.log('the send message return', props.sentMessage);
-    //TODO - add to chat
-    let name = {name : props.loggedInUser.name};
-    let message = {message : event.target.value };
-    // setChat([...chat, {name, message}])
-    event.target.value='';
+    event.target.value = '';
   };
 }
-const postMessage = () => {
-  console.log('post fake-button clicked');
-  props.sendMessage(props.loggedInUser.user_Id, 101, state.message);
-  //form["message"].value = '';
-  //todo clear field; above line doesn't work
-};
+//
+// const onTextChange = (e) => {
+//     setState({...state, [e.target.name]: e.target.value})
+//     console.log(state)
+// }
+
+// const onMessageSubmit = (e) => {
+//     e.preventDefault();
+//     const {name, message} = state
+//     io.emit('message', {name, message})
+//     setState({message: '', name})
+    
+
+// }
 
   return ( 
     <Container fluid>
     <Row>&nbsp;</Row>
     <Row>
-      <SideBar/>
+      <Col sm={3}>
+      <div className="channels-list" style={{background: 'azure', height: 'auto'}}>
+        <ListGroup variant="flush">
+          <ListGroup.Item variant="success"><b>Channels</b></ListGroup.Item>
+          <ListGroup.Item action>General</ListGroup.Item>
+          <ListGroup.Item action>Javascript</ListGroup.Item>
+          <ListGroup.Item action>Clark/Jim</ListGroup.Item>
+          <ListGroup.Item action>Daniel/PJ</ListGroup.Item>
+          <ListGroup.Item>&nbsp;</ListGroup.Item>
+        </ListGroup></div>
+      <div className="users-list" style={{background: 'antiquewhite', height: 'auto'}}>
+        <ListGroup variant="flush">
+          <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
+          <ListGroup.Item action>PJ</ListGroup.Item>
+          <ListGroup.Item action>Clark</ListGroup.Item>
+          <ListGroup.Item action>Aissa</ListGroup.Item>
+          <ListGroup.Item action>Jim</ListGroup.Item>
+          <ListGroup.Item action>Daniel</ListGroup.Item>
+      </ListGroup> </div>
+      
+      </Col>
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
 
-    
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
         {renderChat()}
+      
       </ListGroup>
-
-
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={messageText}>
-      <FormControl name='message' id='messageId'></FormControl>
+      <FormControl name='message'></FormControl>
     <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>

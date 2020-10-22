@@ -1,6 +1,6 @@
 import { FETCH_USERS } from '../actions';
 
-const initialState = [];
+const initialState =    [];
 
 export default function (state = initialState, action) {
   console.log('in reducer-fetch-users');
