@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.7.29)
 # Database: slack-project.sql
-# Generation Time: 2020-10-22 16:57:28 +0000
+# Generation Time: 2020-10-22 18:14:35 +0000
 # ************************************************************
 
 
@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `channels`;
 
 CREATE TABLE `channels` (
   `channel_Id` int(11) NOT NULL,
-  `channelName` char(11) DEFAULT NULL,
+  `channelName` char(35) DEFAULT NULL,
   `firstUser_Id` int(11) DEFAULT NULL,
   `secondUser_Id` int(11) DEFAULT NULL,
   PRIMARY KEY (`channel_Id`)
@@ -41,7 +41,11 @@ VALUES
 	(101,'General',NULL,NULL),
 	(102,'Javascript',NULL,NULL),
 	(103,'Clark/Jim',1,3),
-	(104,'Daniel/PJ',2,4);
+	(104,'Daniel/PJ',2,4),
+	(1131,NULL,1,NULL),
+	(30328,NULL,1,2),
+	(32938,NULL,1,2),
+	(47464,NULL,1,2);
 
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 UNLOCK TABLES;

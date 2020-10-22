@@ -78,6 +78,7 @@ const postMessage = () => {
           <ListGroup.Item action>Daniel/PJ</ListGroup.Item>
           <ListGroup.Item>&nbsp;</ListGroup.Item>
         </ListGroup></div>
+        
       <div className="users-list" style={{background: 'antiquewhite', height: 'auto'}}>
         <ListGroup variant="flush">
           <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
@@ -93,11 +94,13 @@ const postMessage = () => {
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
 
+    
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
         {renderChat()}
-      
       </ListGroup>
+
+
     </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={messageText}>
       <FormControl name='message'></FormControl>
