@@ -76,9 +76,9 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
      // Create the new message
-     let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
+     let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content, timestamp: CURRENT_TIME()};
      // Query the pool
-     pool.query('insert into messages (message_Id, channel_Id, user_Id, content) values (?, ?, ?, ?)', [newMessage.message_Id, newMessage.channel_Id, newMessage.user_Id, newMessage.content], function (error, results, fields) {
+     pool.query('insert into messages (message_Id, channel_Id, user_Id, content, timestamp) values (?, ?, ?, ?, ?)', [newMessage.message_Id, newMessage.channel_Id, newMessage.user_Id, newMessage.content, newMessage.timestamp], function (error, results, fields) {
      // Handle error after the release.
      if (error) throw error;
      //send newUser to front end
