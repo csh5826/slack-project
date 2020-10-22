@@ -31,7 +31,7 @@ router.get('/users', (request, response, next) => {
 //endpoint for users logging in. Adds user to DB, returns newUser w/ {Id, name, active} to front end
 router.post('/login', (request, response, next) => {
   //Create a new user and add them to database
-  if (!request.body.username) {alert ("Please add a username")}; else {
+  if (!request.body.username) {alert ("Please add a username")}; 
 
      let newUser = {user_Id: Math.floor(Math.random()*50000), name: request.body.username, active: 1};
      // Query the pool
@@ -41,7 +41,7 @@ router.post('/login', (request, response, next) => {
       //send newUser to front end
       response.send(newUser);
     });
-  }
+  
   })
 
   //endpoint for users logging out. Changes user's active status back to 0 in db
@@ -80,7 +80,7 @@ router.get('/channels/:channelId/messages', (request, response, next) => {
 
 //endpoint to create a new message. 
 router.post('/channels/:channelId/messages', (request, response, next) => {
-  if (!request.body.content) {alert ("Please add a message")} else {
+  if (!request.body.content) {alert ("Please add a message")} 
      // Create the new message
      let newMessage = {message_Id: Math.floor(Math.random()*50000), channel_Id: request.params.channelId, user_Id: request.body.user_Id, content: request.body.content};
      // Query the pool
@@ -90,7 +90,7 @@ router.post('/channels/:channelId/messages', (request, response, next) => {
      //send newUser to front end
      response.send(newUser);
   });
-}
+
 })
 
 //endpoint to create a new channel. How to handle "user 1 & user 2"
