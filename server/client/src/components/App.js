@@ -1,9 +1,11 @@
 import React from 'react';
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import socketio from 'socket.io-client';
 import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
+import { fetchChannels } from '../actions'
+import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
+
 const server = 'http://localhost:5000/'
 
 const io = socketio(server);
@@ -12,7 +14,17 @@ io.on('connection', () => {
 })  
 
 const App = (props) => {
+  let checkChannels = [1];
+  console.log('before  fetch avail channels: ', props.availableChannels);
   console.log("the props you need  ",  props);
+  // TODO add conditional to check if user is logged in....then:
+if (props.availableChannels.channel_Id === 0) {
+  props.fetchChannels()
+  //.then(
+  console.log(props.availableChannels);
+  // return availableChannels
+};
+console.log('after fetch avail channels: ', props.availableChannels);
   const postMessage = (event) => {
     console.log('post button clicked');
   };
@@ -114,17 +126,19 @@ const messageText = (event) => {
 }
 
 function mapStateToProps(state) {
-  return { loggedInUser: state.loggedInUser}
+  return { loggedInUser: state.loggedInUser,
+  availableChannels: state.availableChannels}
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(
-//     {
-//     },
-//     dispatch
-//   );
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      fetchChannels
+    },
+    dispatch
+  );
+}
 
-export default connect(mapStateToProps) (App);
+export default connect(mapStateToProps, mapDispatchToProps) (App);
 
 

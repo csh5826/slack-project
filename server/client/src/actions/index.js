@@ -8,9 +8,28 @@ export const CREATE_DIRECT_CHAT = 'create_direct_chat';
 export const UPDATE_ONLINE_USERS_STATUS = 'update_online_users_status';
 
 const ROOT_URL = 'http://localhost:5000/api'
+
 // log in a user. get back an id and active status
 export function setCurrentUser(user) {
 
+  const res = axios.post(`${ROOT_URL}/login`, {username: user});
+  console.log('received from server-login: ', res.data)
+  return { type: SET_CURRENT_USER, payload: res}
+
+}
+
+// fetch current channels
+export function fetchChannels() {
+
+  const res = axios.get(`${ROOT_URL}/channels`);
+  console.log('received from server-channels: ', res.data)
+  return { type: FETCH_CHANNELS, payload: res}
+
+}
+
+
+
+// junk drawer
 // axios({
 //   method: 'post',
 //   url: `http://localhost:5000/api/login`,
@@ -26,10 +45,7 @@ export function setCurrentUser(user) {
 
 // }
 // alternate request format 
-  const res = axios.post(`http://localhost:5000/api/login`, {username: user});
-  console.log('received from server-login: ', res.data)
-  return { type: SET_CURRENT_USER, payload: res}
-}
+
 //for testing only. not for normal use.
 // export function setCurrentUser(user) {
   // return {
