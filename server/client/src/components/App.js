@@ -120,6 +120,7 @@ const messageText = (event) => {
           <ListGroup.Item action>Daniel/PJ</ListGroup.Item>
           <ListGroup.Item>&nbsp;</ListGroup.Item>
         </ListGroup></div>
+        
       <div className="users-list" style={{background: 'antiquewhite', height: 'auto'}}>
         <ListGroup variant="flush">
           <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
@@ -136,7 +137,6 @@ const messageText = (event) => {
     <h4>General Channel</h4>
 
     
-    //MAKE INTO COMPONENT
     <div className="chat-window" style={{background: 'snow', height: '90%'}}>
       <ListGroup variant="flush">
         {renderChat()}
