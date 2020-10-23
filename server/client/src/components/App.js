@@ -75,14 +75,8 @@ messageText = (event) => {
 refreshMessages = () => {
   this.props.fetchChannelMessages(this.props.currentChannelId);
 };
-// obsolete
-// tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
-//       return (
-//           <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
-//       )
-//   });
-//   return aChat;
-// }
+
+
 render() {
   return ( 
     <Container fluid>
