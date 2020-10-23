@@ -14,6 +14,7 @@ import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 
 import SideBar from './SideBar';
 import MessageBox from './MessageBox';
 import ChannelTitle from './ChannelTitle';
+import '../CSS/MessageScroll.css';
 
 const server = 'http://localhost:5000/'
 
@@ -70,9 +71,6 @@ class App extends Component {
     this.props.fetchChannelMessages(this.props.currentChannelId);
   }
 
-
-
-
     render() {
       return ( 
         <Container fluid>
@@ -82,17 +80,22 @@ class App extends Component {
         <Col sm={9}>
         <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}><b>Logout</b> {this.props.loggedInUser.name}</Button>
         {/* <h4>{this.channelNameTitle()}</h4> */}
+        <div id="boxed-in">
         <ChannelTitle/>
+        <div id="chat-box">
         <MessageBox/>
+        </div>
         <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
           <InputGroup onKeyUp={this.messageText}>
           <FormControl name='message' id='messageId'></FormControl>
         <InputGroup.Append><Button onClick={this.refreshMessages}>Refresh Messages</Button></InputGroup.Append></InputGroup></div>
+        </div>
         </Col>
         </Row>
       </Container>
       
       )};
+
 }
 
 function mapStateToProps(state) {

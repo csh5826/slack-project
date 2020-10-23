@@ -16,7 +16,7 @@ class MessageBox extends Component {
         console.log('props are', this.props);
         let messages = this.props.channelMessages.map(message => {
             return (
-                <ListGroup.Item>{message.username}: {message.content}</ListGroup.Item>
+                <ListGroup.Item className='color'>{message.username}: {message.content}</ListGroup.Item>
             )
         });
         return messages;
