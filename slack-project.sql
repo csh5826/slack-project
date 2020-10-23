@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.7.29)
 # Database: slack-project.sql
-# Generation Time: 2020-10-22 18:14:35 +0000
+# Generation Time: 2020-10-23 15:10:22 +0000
 # ************************************************************
 
 
@@ -40,9 +40,9 @@ INSERT INTO `channels` (`channel_Id`, `channelName`, `firstUser_Id`, `secondUser
 VALUES
 	(101,'General',NULL,NULL),
 	(102,'Javascript',NULL,NULL),
-	(103,'IceCream',NULL,NULL)),
-	(104,'React/Redux',NULL,NULL),
-	
+	(103,'Ice cream',1,3),
+	(104,'React/redux',2,4),
+	(42779,'Firecrackers',1,2);
 
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 UNLOCK TABLES;
