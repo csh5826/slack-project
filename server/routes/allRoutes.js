@@ -2,19 +2,26 @@
 const express = require('express');
 const router = express.Router();
 
-//connecting to local mysql database
+//connecting to local or served mysql database
 const mysql = require('mysql');
+
+let pool;
+
 if (process.env.NODE_ENV === 'production') {
-  const pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL)
+  console.log("in production!")
+   pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 } else {
-const pool  = mysql.createPool({
-  connectionLimit : 10,
-  host            : 'localhost',
-  user            : 'aissa',
-  password        : 'cohortx',
-  database        : 'slack-project.sql'
-});
+      pool  = mysql.createPool(
+     {
+     connectionLimit : 10,
+     host            : 'localhost',
+     user            : 'aissa',
+     password        : 'cohortx',
+     database        : 'slack-project.sql'
+   });
+   console.log("end of pool")
 }
+
 
 //essentially a route for testing
 router.get('/api/', (request, response, next) => {
