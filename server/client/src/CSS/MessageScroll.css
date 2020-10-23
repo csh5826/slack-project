@@ -1,0 +1,14 @@
+
+ #boxed-in {
+    display: inline-block;
+    width: 750px;
+    height: auto;
+    margin-top: 1%;
+    border: 2px black solid;
+    overflow: hidden;
+}
+#chat-box {
+    height: 600px;
+    max-height: 800px;
+    overflow-y: scroll;
+}
