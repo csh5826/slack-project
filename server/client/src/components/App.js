@@ -79,13 +79,6 @@ postMessage = () => {
   //todo clear field; above line doesn't work
 };
 
-tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
-      return (
-          <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
-      )
-  });
-  return aChat;
-}
 render() {
   return ( 
     <Container fluid>

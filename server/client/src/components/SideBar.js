@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
 import { fetchUsers } from '../actions';
 import { fetchChannelMessages} from '../actions';
 import { bindActionCreators } from "redux";
 import { ListGroup, Col } from 'react-bootstrap';
-import _ from 'lodash';
 
 class SideBar extends Component {
 
@@ -18,7 +17,6 @@ class SideBar extends Component {
 
     //renders all channels
     renderChannelGroup() {
-        console.log('SideBar props are', this.props.availableChannels);
         let channels = this.props.availableChannels.map(channel => {
             return (
                 <ListGroup.Item action>{channel.channelName}</ListGroup.Item>
@@ -37,22 +35,24 @@ class SideBar extends Component {
     }
     render() {
         return (
-<div>
+<Fragment>
     <Col sm={3}>
         <div className="channels-list" style={{ background: 'azure', height: 'auto' }}>
             <ListGroup variant="flush">
                 <ListGroup.Item variant="success"><b>Channels</b></ListGroup.Item>
                 {this.renderChannelGroup()}
                 <ListGroup.Item>&nbsp;</ListGroup.Item>
-            </ListGroup></div>
+            </ListGroup>
+        </div>
 
         <div className="users-list" style={{ background: 'antiquewhite', height: 'auto' }}>
             <ListGroup variant="flush">
                 <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
                 {this.renderUserGroup()}
-            </ListGroup> </div>
+            </ListGroup>
+        </div>
     </Col>
-</div>           
+</Fragment>          
         )
     }
 }
