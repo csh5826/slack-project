@@ -88,7 +88,7 @@ class App extends Component {
         <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
           <InputGroup onKeyUp={this.messageText}>
           <FormControl name='message' id='messageId'></FormControl>
-        <InputGroup.Append><Button onClick={this.refreshMessages}>Refresh Messages</Button></InputGroup.Append></InputGroup></div>
+        <InputGroup.Append><Button onClick={this.refreshMessages}>Submit</Button></InputGroup.Append></InputGroup></div>
         </div>
         </Col>
         </Row>
