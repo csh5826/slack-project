@@ -4,6 +4,9 @@ const router = express.Router();
 
 //connecting to local mysql database
 const mysql = require('mysql');
+if (process.env.NODE_ENV === 'production') {
+  const pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL)
+} else {
 const pool  = mysql.createPool({
   connectionLimit : 10,
   host            : 'localhost',
@@ -11,6 +14,7 @@ const pool  = mysql.createPool({
   password        : 'cohortx',
   database        : 'slack-project.sql'
 });
+}
 
 //essentially a route for testing
 router.get('/api/', (request, response, next) => {
