@@ -73,11 +73,8 @@ router.get('/channels', (request, response, next) => {
 //endpoint for retrieving one channel with messages
 router.get('/channels/:channelId/messages', (request, response, next) => {
     //query the pool
-
     console.log(`getting group messages for channel ${request.params.channelId}`);
-
     pool.query('SELECT m.content, m.timestamp, m.channel_Id, u.username FROM messages m INNER JOIN users u ON m.user_Id=u.user_Id WHERE m.channel_Id = ? ORDER BY m.timestamp ASC', request.params.channelId, function (error, results, fields){
-
     if (error) throw error;
     console.log(results)
     //send {content: <message>} to front end
