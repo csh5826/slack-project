@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setState, useState, useRef, useEffect } from "react";
+// import { setState, useState, useRef, useEffect } from "react";
 // import socketio from 'socket.io-client';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
@@ -23,7 +23,7 @@ class App extends Component {
       // const [chat, setChat] = useState([])
       
       if (this.props.loggedInUser.user_Id === 0) {
-        //props.history.push('/login');
+        this.props.history.push('/login');
       }
       //fill the store //
       this.props.fetchChannels();
@@ -43,6 +43,7 @@ logoutClicked = (event) => {
     this.props.logoutUser(this.props.loggedInUser.user_Id);
     this.props.setCurrentUser(0);
     console.log('logout response is: ', this.props.logoutUserStatus);
+    this.props.history.push('/login');
   };
 
 // TO DO as a separate component?
@@ -71,21 +72,17 @@ messageText = (event) => {
     event.target.value='';
   };
 }
-postMessage = () => {
-  console.log('post fake-button clicked');
-  this.props.sendMessage(this.props.loggedInUser.user_Id, this.props.currentChannelId, this.state.message);
+refreshMessages = () => {
   this.props.fetchChannelMessages(this.props.currentChannelId);
-  //form["message"].value = '';
-  //todo clear field; above line doesn't work
 };
-
-tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
-      return (
-          <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
-      )
-  });
-  return aChat;
-}
+// obsolete
+// tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
+//       return (
+//           <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
+//       )
+//   });
+//   return aChat;
+// }
 render() {
   return ( 
     <Container fluid>
@@ -93,13 +90,13 @@ render() {
     <Row>
       <SideBar/>
     <Col sm={9}>
-    <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}>Logout</Button>
+    <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}><b>Logout</b> {this.props.loggedInUser.name}</Button>
     <h4>General Channel</h4>
     <MessageBox/>
     <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={this.messageText}>
       <FormControl name='message' id='messageId'></FormControl>
-    <InputGroup.Append><InputGroup.Text onClick={this.postMessage}>{this.props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
+    <InputGroup.Append><Button onClick={this.refreshMessages}>Refresh Messages</Button></InputGroup.Append></InputGroup></div>
     </Col>
     </Row>
   </Container>

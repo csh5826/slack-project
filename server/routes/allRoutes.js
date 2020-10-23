@@ -7,8 +7,8 @@ const mysql = require('mysql');
 const pool  = mysql.createPool({
   connectionLimit : 10,
   host            : 'localhost',
-  user            : 'clark',
-  password        : 'g0thers@',
+  user            : 'aissa',
+  password        : 'cohortx',
   database        : 'slack-project.sql'
 });
 

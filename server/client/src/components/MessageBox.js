@@ -21,6 +21,7 @@ class MessageBox extends Component {
         });
         return messages;
     }
+
     render() {
         return (
             <div className="chat-window" style={{ background: 'snow', height: '90%' }}>
