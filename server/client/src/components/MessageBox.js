@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { fetchChannelMessages } from '../actions';
+import { fetchChannelMessages, setChannelId } from '../actions';
 import { bindActionCreators } from "redux";
 import { ListGroup } from 'react-bootstrap';
 
@@ -8,7 +8,7 @@ class MessageBox extends Component {
 
     componentDidMount() {
         console.log('component should mount')
-        this.props.fetchChannelMessages(101);
+        this.props.fetchChannelMessages(this.props.currentChannelId);
     }
 
     // renders all messages for a channel
@@ -16,7 +16,7 @@ class MessageBox extends Component {
         console.log('props are', this.props);
         let messages = this.props.channelMessages.map(message => {
             return (
-                <ListGroup.Item action>{message.content}</ListGroup.Item>
+                <ListGroup.Item>{message.content}</ListGroup.Item>
             )
         });
         return messages;
@@ -34,14 +34,16 @@ class MessageBox extends Component {
 
 function mapStateToProps(state) {
     return {
-        channelMesssages: state.channelMesssages
+        channelMessages: state.channelMessages,
+        currentChannelId: state.currentChannelId
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(
         {
-            fetchChannelMessages
+            fetchChannelMessages,
+            setChannelId
         },
         dispatch
     );
