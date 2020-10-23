@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import { fetchChannels } from '../actions';
 import { fetchUsers } from '../actions';
-import { fetchChannelMessages} from '../actions';
+import { setChannelId } from '../actions';
+import { fetchChannelMessages } from '../actions';
 import { bindActionCreators } from "redux";
 import { ListGroup, Col } from 'react-bootstrap';
 
@@ -12,14 +13,19 @@ class SideBar extends Component {
         console.log('something should log')
         this.props.fetchChannels();
         this.props.fetchUsers();
-        // this.props.fetchChannelMessages(101);
+    }
+    
+    changeChannel = (event) => {
+        // console.log('changeChannel event:', event.target.getAttribute("data-channel_Id"))
+        this.props.setChannelId(event.target.getAttribute("data-channel_Id"));
+        this.props.fetchChannelMessages(this.props.currentChannelId);
     }
 
     //renders all channels
     renderChannelGroup() {
         let channels = this.props.availableChannels.map(channel => {
             return (
-                <ListGroup.Item action>{channel.channelName}</ListGroup.Item>
+                <ListGroup.Item action key={channel.channel_Id} data-channel_Id={channel.channel_Id} onClick={this.changeChannel}>{channel.channelName}</ListGroup.Item>
             )
         });
         return channels;
@@ -27,8 +33,10 @@ class SideBar extends Component {
     // render all users 
     renderUserGroup() {
         let users = this.props.onlineUsers.map(user => {
+            let theValue='connected'
+            user.active ? theValue = 'logged-in': theValue = 'logged-out'
             return (
-                <ListGroup.Item action>{user.username}</ListGroup.Item>
+                <ListGroup.Item value={theValue}>{user.username}</ListGroup.Item>
             )
         });
         return users;
@@ -45,7 +53,7 @@ class SideBar extends Component {
             </ListGroup>
         </div>
 
-        <div className="users-list" style={{ background: 'antiquewhite', height: 'auto' }}>
+        <div className="users-list" style={{ height: 'auto' }}>
             <ListGroup variant="flush">
                 <ListGroup.Item variant="info"><b>Users</b></ListGroup.Item>
                 {this.renderUserGroup()}
@@ -60,7 +68,8 @@ class SideBar extends Component {
 function mapStateToProps(state) {
     return {
         availableChannels: state.availableChannels,
-        onlineUsers: state.onlineUsers
+        onlineUsers: state.onlineUsers,
+        currentChannelId: state.currentChannelId
     }
 }
 
@@ -69,7 +78,8 @@ function mapDispatchToProps(dispatch) {
         {
             fetchChannels,
             fetchUsers,
-            // fetchChannelMessages
+            setChannelId,
+            fetchChannelMessages
         },
         dispatch
     );
