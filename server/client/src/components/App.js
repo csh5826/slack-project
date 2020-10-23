@@ -10,6 +10,7 @@ import { fetchChannelMessages } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import SideBar from './SideBar';
+import MessageBox from './MessageBox';
 
 // window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
@@ -94,18 +95,7 @@ const postMessage = () => {
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
-
-    
-    <div className="chat-window" style={{background: 'snow', height: '90%'}}>
-      <ListGroup variant="flush">
-        {renderChat()}
-      </ListGroup>
-
-
-    </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
-      <InputGroup onKeyUp={messageText}>
-      <FormControl name='message' id='messageId'></FormControl>
-    <InputGroup.Append><InputGroup.Text onClick={postMessage}>{props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
+    <MessageBox/>
     </Col>
     </Row>
   </Container>

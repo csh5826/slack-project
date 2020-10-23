@@ -18,7 +18,7 @@ class SideBar extends Component {
 
     //renders all channels
     renderChannelGroup() {
-        console.log('props are', this.props.availableChannels);
+        // console.log('props are', this.props);
         let channels = this.props.availableChannels.map(channel => {
             return (
                 <ListGroup.Item action>{channel.channelName}</ListGroup.Item>
