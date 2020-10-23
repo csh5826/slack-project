@@ -13,6 +13,7 @@ import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import SideBar from './SideBar';
 import MessageBox from './MessageBox';
+import '../CSS/MessageScroll.css';
 
 const server = 'http://localhost:5000/'
 
@@ -86,12 +87,17 @@ render() {
       <SideBar/>
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}><b>Logout</b> {this.props.loggedInUser.name}</Button>
-    <h4>General Channel</h4>
-    <MessageBox/>
-    <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
-      <InputGroup onKeyUp={this.messageText}>
-      <FormControl name='message' id='messageId'></FormControl>
-    <InputGroup.Append><Button onClick={this.refreshMessages}>Refresh Messages</Button></InputGroup.Append></InputGroup></div>
+    <div id='boxed-in'>
+      <h4>General Channel</h4>
+      <div id='chat-box'>
+      <MessageBox/>
+      </div>
+      <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
+        <InputGroup onKeyUp={this.messageText}>
+        <FormControl name='message' id='messageId'></FormControl>
+      <InputGroup.Append><Button onClick={this.refreshMessages}>Refresh Messages</Button></InputGroup.Append></InputGroup></div>
+      
+    </div>
     </Col>
     </Row>
   </Container>
