@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setCurrentUser } from '../actions';
@@ -6,42 +6,45 @@ import { Row, Container, Col, InputGroup, FormControl, Button } from 'react-boot
 
 
 
+ 
+class Login extends Component {
 
-//class Login extends Component {
-const Login = (props) => {
-const submitLogin = (event) => {
+submitLogin = (event) => {
   console.log(event.target.value);
-  if (event.key === "Enter") {
-    props.setCurrentUser(event.target.value);
-    //insert delay or promise here?
-    props.history.push('/');
-  }
-  //   
-  // this.props.signin(formProps, () => {
- //     this.props.history.push('/');
-  //   });
+    if (event.key === "Enter") {
+      this.props.setCurrentUser(event.target.value);
+      
+      //insert delay or promise here?
+      setTimeout(this.props.history.push('/'), 5000);
+    }
   };
-  //render() {
+submitLoginButton() {
+  console.log('clicked it')
+}
 
 
+render() {
   return (
+    <div>
     <Container fluid>
+    
       <Row>&nbsp;</Row>
       <Row>
         <Col></Col>
       <Col md="auto">
+        <h2>PROJECT SLACK by COHORT X</h2>
       <h3>Enter your name to join:</h3>
-      <InputGroup className="mb-3" onKeyUp={submitLogin} name="login-form"><FormControl placeholder="Your name"></FormControl></InputGroup>
-      <Button variant="outline-dark" onClick={submitLogin} className="float-right">Login</Button>
+      <InputGroup className="mb-3" onKeyUp={this.submitLogin} name="login-form"><FormControl placeholder="Your name"></FormControl></InputGroup>
+      <Button variant="outline-dark" onClick={this.submitLoginButton} className="float-right">Login</Button>
       </Col>
       <Col></Col>
       </Row>
-    </Container>
-          
+          </Container>
+      </div>    
         
   );
+  }
 }
-//}
 
 function mapStateToProps(state) {
   return { loggedInUser: state.loggedinUser}

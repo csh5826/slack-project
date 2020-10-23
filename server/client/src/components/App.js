@@ -23,6 +23,7 @@ class App extends Component {
       // const [chat, setChat] = useState([])
       
       if (this.props.loggedInUser.user_Id === 0) {
+        console.log('yup, I actually went here');
         this.props.history.push('/login');
       }
       //fill the store //
