@@ -7,35 +7,31 @@ import { fetchUsers } from '../actions';
 import { logoutUser } from '../actions';
 import { sendMessage } from '../actions';
 import { fetchChannelMessages } from '../actions';
+import { setChannelId } from '../actions';
+import { setCurrentUser } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import SideBar from './SideBar';
-import { render } from 'react-dom';
 
-// window.render = () => { ReactDOM.render(<App/>, document.getElementById('root'))};
 const server = 'http://localhost:5000/'
 
 class App extends Component {
-// const App = (props) => {
-  //defining state ///
 
   componentDidMount(){
       // const [state, setState] = useState({name: this.props.loggedInUser.name, message: ''})
       // const [chat, setChat] = useState([])
-      
-      
       
       if (this.props.loggedInUser.user_Id === 0) {
         //props.history.push('/login');
       }
       //fill the store //
       this.props.fetchChannels();
-      this.props.fetchChannelMessages(101);
+      this.props.fetchChannelMessages(this.props.currentChannelId);
       this.props.fetchUsers();
 
-      console.log('after fetch avail channels: ', this.props.availableChannels);
-      console.log('after fetch online users: ', this.props.onlineUsers);
-      console.log('after fetch channel messages: ', this.props.channelMessages);
+      // console.log('after fetch avail channels: ', this.props.availableChannels);
+      // console.log('after fetch online users: ', this.props.onlineUsers);
+      // console.log('after fetch channel messages: ', this.props.channelMessages);
 
       console.log("App.js props are ",  this.props);
     }
@@ -43,7 +39,8 @@ class App extends Component {
 
 logoutClicked = (event) => {
     console.log('logout button clicked for ', this.props.loggedInUser.user_Id);
-    this.sendMessageprops.logoutUser(this.props.loggedInUser.user_Id);
+    this.props.logoutUser(this.props.loggedInUser.user_Id);
+    this.props.setCurrentUser(0);
     console.log('logout response is: ', this.props.logoutUserStatus);
   };
 
@@ -63,8 +60,9 @@ messageText = (event) => {
   
   if (event.key === "Enter") {
     // setState({...this.state, message: event.target.value});  // for to make button work // make regular var?
-    this.props.sendMessage(this.props.loggedInUser.user_Id, 101, event.target.value);
+    this.props.sendMessage(this.props.loggedInUser.user_Id, this.props.currentChannelId, event.target.value);
     console.log('the send message return', this.props.sentMessage);
+    this.props.fetchChannelMessages(this.props.currentChannelId);
     //TODO - add to chat
     // let name = {name : props.loggedInUser.name};
     // let message = {message : event.target.value };
@@ -74,8 +72,8 @@ messageText = (event) => {
 }
 postMessage = () => {
   console.log('post fake-button clicked');
-  this.props.sendMessage(this.props.loggedInUser.user_Id, 101, this.state.message);
-  this.props.fetchChannelMessages(101);
+  this.props.sendMessage(this.props.loggedInUser.user_Id, this.props.currentChannelId, this.state.message);
+  this.props.fetchChannelMessages(this.props.currentChannelId);
   //form["message"].value = '';
   //todo clear field; above line doesn't work
 };
@@ -123,8 +121,8 @@ function mapStateToProps(state) {
     onlineUsers: state.onlineUsers,
     logoutUserStatus: state.logoutUserStatus,
     sentMessage: state.sentMessage,
-    channelMessages: state.channelMessages
-
+    channelMessages: state.channelMessages,
+    currentChannelId: state.currentChannelId
   }
 }
 
@@ -135,7 +133,9 @@ function mapDispatchToProps(dispatch) {
       fetchUsers,
       logoutUser,
       sendMessage,
-      fetchChannelMessages
+      fetchChannelMessages,
+      setChannelId,
+      setCurrentUser 
     },
     dispatch
   );
