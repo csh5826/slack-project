@@ -73,7 +73,7 @@ router.get('/channels', (request, response, next) => {
 //endpoint for retrieving one channel with messages
 router.get('/channels/:channelId/messages', (request, response, next) => {
     //query the pool
-    pool.query('select content, user_Id from messages where channel_Id = ?', request.params.channelId, function (error, results, fields){
+    pool.query('select content, user_Id, timestamp from messages where channel_Id = ? order by timestamp ASC', request.params.channelId, function (error, results, fields){
     if (error) throw error;
     //send {content: <message>} to front end
     response.send(results)
