@@ -4,6 +4,7 @@ const router = express.Router();
 
 //connecting to local mysql database
 const mysql = require('mysql');
+const pool = mysql.createPool(process.env.MYSQLCONNSTR_connectionstring);
 const pool  = mysql.createPool({
   connectionLimit : 10,
   host            : 'localhost',
