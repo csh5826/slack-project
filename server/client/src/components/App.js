@@ -12,6 +12,7 @@ import { setCurrentUser } from '../actions';
 import { bindActionCreators } from "redux";
 import { Row, Container, ListGroup, Col, InputGroup, FormControl, Button } from 'react-bootstrap';
 import SideBar from './SideBar';
+import MessageBox from './MessageBox';
 
 const server = 'http://localhost:5000/'
 
@@ -78,13 +79,6 @@ postMessage = () => {
   //todo clear field; above line doesn't work
 };
 
-tempRenderChat() {let aChat = this.props.channelMessages.map(stuff => {
-      return (
-          <ListGroup.Item>DUMMY{stuff.user_Id}: {stuff.content}</ListGroup.Item>
-      )
-  });
-  return aChat;
-}
 render() {
   return ( 
     <Container fluid>
@@ -94,16 +88,8 @@ render() {
     <Col sm={9}>
     <Button variant="outline-dark" size="sm" className="float-right" onClick={this.logoutClicked}>Logout</Button>
     <h4>General Channel</h4>
-
-    
-    <div className="chat-window" style={{background: 'snow', height: '90%'}}>
-      <ListGroup variant="flush">
-        {/* {this.renderChat()} */}
-        {this.tempRenderChat()}
-      </ListGroup>
-
-
-    </div><div className="message-composer" style={{background: 'silver', height: 'auto'}}>
+    <MessageBox/>
+    <div className="message-composer" style={{background: 'silver', height: 'auto'}}>
       <InputGroup onKeyUp={this.messageText}>
       <FormControl name='message' id='messageId'></FormControl>
     <InputGroup.Append><InputGroup.Text onClick={this.postMessage}>{this.props.loggedInUser.name}</InputGroup.Text></InputGroup.Append></InputGroup></div>
