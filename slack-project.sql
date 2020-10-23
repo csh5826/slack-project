@@ -40,12 +40,9 @@ INSERT INTO `channels` (`channel_Id`, `channelName`, `firstUser_Id`, `secondUser
 VALUES
 	(101,'General',NULL,NULL),
 	(102,'Javascript',NULL,NULL),
-	(103,'Clark/Jim',1,3),
-	(104,'Daniel/PJ',2,4),
-	(1131,NULL,1,NULL),
-	(30328,NULL,1,2),
-	(32938,NULL,1,2),
-	(47464,NULL,1,2);
+	(103,'IceCream',NULL,NULL)),
+	(104,'React/Redux',NULL,NULL),
+	
 
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 UNLOCK TABLES;
