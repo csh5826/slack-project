@@ -28,7 +28,7 @@ class Login extends Component {
 
   submitLoginButton= (event) => {
     console.log(document.getElementById("name-entry").value);
-    console("props", this.props);
+    console.log("props", this.props);
 
     setTimeout(() => {
       // this.props.setCurrentUser(document.getElementById("name-entry").value);
