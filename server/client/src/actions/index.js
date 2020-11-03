@@ -11,7 +11,12 @@ export const FETCH_USERS = "fetch_users";
 export const SEND_A_MESSAGE = "send_a_message";
 export const SET_CHANNEL_ID = "set_channel_id";
 
+<<<<<<< HEAD
 const ROOT_URL = "/api";
+=======
+
+const ROOT_URL = 'http://localhost:5000/api'
+>>>>>>> d73a06ffa5be7d207de7d6ab78b349346bb55aef
 
 // log in a user. get back an id and active status
 export function setCurrentUser(user) {
