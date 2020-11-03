@@ -12,7 +12,7 @@ export const SEND_A_MESSAGE = 'send_a_message';
 export const SET_CHANNEL_ID = 'set_channel_id';
 
 
-const ROOT_URL = '/api'
+const ROOT_URL = 'http://localhost:5000/api'
 
 // log in a user. get back an id and active status
 export function setCurrentUser(user) {
