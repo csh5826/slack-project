@@ -31,7 +31,7 @@ class Login extends Component {
     console.log("props", this.props);
 
     setTimeout(() => {
-      // this.props.setCurrentUser(document.getElementById("name-entry").value);
+      this.props.setCurrentUser(document.getElementById("name-entry").value);
     }, 500);
 
     setTimeout(() => {
