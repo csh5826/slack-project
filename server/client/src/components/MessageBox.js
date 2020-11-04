@@ -40,7 +40,7 @@ class MessageBox extends Component {
                 finalDate = finalDateTwo.concat(finalDate)
             }
             return (
-                <ListGroup.Item className='color'>{finalDate} {message.username}: {message.content}</ListGroup.Item>
+                <ListGroup.Item className='color'><small className="text-muted">{finalDate}</small> {message.username}: {message.content}</ListGroup.Item>
             )
         });
         return messages;

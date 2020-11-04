@@ -18,7 +18,7 @@ class SideBar extends Component {
     changeChannel = (event) => {
         // console.log('changeChannel event:', event.target.getAttribute("data-channel_Id"))
         this.props.setChannelId(event.target.getAttribute("data-channel_Id"));
-        this.props.fetchChannelMessages(this.props.currentChannelId);
+        this.props.fetchChannelMessages(event.target.getAttribute("data-channel_Id"));
     }
 
     //renders all channels
