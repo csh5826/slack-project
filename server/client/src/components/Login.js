@@ -12,19 +12,19 @@ import {
 } from "react-bootstrap";
 
 class Login extends Component {
-  // submitLogin = (event) => {
-  //   console.log(event.target.value);
-  //   if (event.key === "Enter") {
-  //     setTimeout(() => {
-  //       this.props.setCurrentUser(event.target.value);
-  //     }, 500);
+  submitLogin = (event) => {
+    console.log(event.target.value);
+    if (event.key === "Enter") {
+      setTimeout(() => {
+        this.props.setCurrentUser(event.target.value);
+      }, 500);
 
   //     setTimeout(() => {
   //       //insert delay or promise here?
   //       this.props.history.push("/");
   //     }, 1000);
-  //   }
-  // };
+    }
+  };
 
   submitLoginButton= (event) => {
     console.log(document.getElementById("name-entry").value);
@@ -59,8 +59,7 @@ class Login extends Component {
               <Button
                 variant="outline-dark"
                 onClick={this.submitLoginButton}
-                className="float-right"
-              >
+                className="float-right">
                 Login
               </Button>
             </Col>

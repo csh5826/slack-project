@@ -9,22 +9,33 @@ class ChannelTitle extends Component {
     //     this.props.fetchChannelMessages(this.props.currentChannelId);
     // }
 
-    // renders all messages for a channel
+    // just the channel name
     renderChannelTitle() {
-        let aChnl = this.props.availableChannels.map(chnl => {       
-            if (chnl.channel_Id === this.props.currentChannelId) {
-              console.log(`looking at ${chnl.channelName} with ${chnl.channel_Id}`);
-              return (<span>{chnl.channelName}</span>)
-              }
-            })
-        return aChnl;
-          } 
+                console.log('just looking at ', this.props.availableChannels )
+                console.log('looking at length ', this.props.availableChannels.length )
+                console.log('also looking at ', this.props.currentChannelId)
+             for (let x = 0 ; x < this.props.availableChannels.length ; x++) {
+                 console.log('looking times ', x )
+                if (parseInt(this.props.currentChannelId) === parseInt(this.props.availableChannels[x].channel_Id)){
+                    return this.props.availableChannels[x].channelName
+                }
+             }   
+            }
+                
+        //         let aChnl = this.props.availableChannels.map(chnl => {       
+        //     if (chnl.channel_Id === this.props.currentChannelId) {
+        //     console.log(`looking at ${chnl.channelName} with ${chnl.channel_Id}`);
+        //     return (chnl.channelName)
+        //     }
+        //     })
+        // return aChnl;
+          // }
 
     render() {
         return (
             <div className="channel-title">
                 <h4>
-                    {/* {this.renderChannelTitle() */}
+                    {this.renderChannelTitle()}
                 </h4>
             </div>
         )
@@ -48,5 +59,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelTitle);
-
-

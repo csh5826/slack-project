@@ -85,17 +85,13 @@ class App extends Component {
         <Row>
           <SideBar />
           <Col sm={9}>
-            <Button
-              variant="outline-dark"
-              size="sm"
-              className="float-right"
-              onClick={this.logoutClicked}
-            >
-              <b>Logout</b> {this.props.loggedInUser.name}
+            
+            <Button variant="outline-dark" size="sm" className="float-right clearfix" onClick={this.logoutClicked}>
+              <b>Logout</b>
             </Button>
-            {/* <h4>{this.channelNameTitle()}</h4> */}
+            <p className="float-right">Welcome,  {this.props.loggedInUser.name}!&nbsp;&nbsp;&nbsp;</p>
+            <h4><ChannelTitle /></h4>
             <div id="boxed-in">
-              <ChannelTitle />
               <div id="chat-box">
                 <MessageBox />
               </div>
