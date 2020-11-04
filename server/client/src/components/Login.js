@@ -21,7 +21,7 @@ class Login extends Component {
     if (event.key === "Enter") {
       // setTimeout(() => {
         this.props.setCurrentUser(event.target.value);
-        this.props.history.push("/");
+        this.props.history.push("/Chat");
       //  }, 500);
 
       // setTimeout(() => {

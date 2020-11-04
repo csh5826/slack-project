@@ -54,7 +54,7 @@ class App extends Component {
     this.props.logoutUser(this.props.loggedInUser.user_Id);
     this.props.setCurrentUser(0);
     console.log("logout response is: ", this.props.logoutUserStatus);
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   messageText = (event) => {
