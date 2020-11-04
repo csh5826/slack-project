@@ -17,16 +17,17 @@ import logoimage from "../components/assets/hashtagbubble.png"
 
 class Login extends Component {
   submitLogin = (event) => {
-    console.log(event.target.value);
+    console.log('here ',event.target.value);
     if (event.key === "Enter") {
-      setTimeout(() => {
+      // setTimeout(() => {
         this.props.setCurrentUser(event.target.value);
-      }, 500);
+        this.props.history.push("/");
+      //  }, 500);
 
-  //     setTimeout(() => {
-  //       //insert delay or promise here?
-  //       this.props.history.push("/");
-  //     }, 1000);
+      // setTimeout(() => {
+      //   //insert delay or promise here?
+      //   this.props.history.push("/");
+      // }, 1000);
     }
   };
 
@@ -59,10 +60,10 @@ class Login extends Component {
               className="d-block mx-auto img-fluid w-90"
             ></Image>
               <h3>Enter name</h3>
-              <InputGroup className="login-form">
+              <InputGroup className="login-form" onKeyUp={this.submitLogin} >
                 <FormControl
                   id="name-entry"
-                  placeholder="Your name"
+                  placeholder="Enter your name..."
                 ></FormControl>
               </InputGroup>
               <Button

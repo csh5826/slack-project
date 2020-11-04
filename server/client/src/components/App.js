@@ -32,7 +32,8 @@ class App extends Component {
     // const [state, setState] = useState({name: this.props.loggedInUser.name, message: ''})
     // const [chat, setChat] = useState([])
 
-    if (this.props.loggedInUser.user_Id === 0) {
+    if (!this.props.loggedInUser) {
+      console.log('logged in user: ', this.props.loggedInUser)
       console.log("yup, I actually went here");
       this.props.history.push("/login");
     }
@@ -73,6 +74,7 @@ class App extends Component {
       // let message = {message : event.target.value };
       // setChat([...chat, {name, message}])
       event.target.value = "";
+      console.log('i are here')
       this.scrollToSection('last-msg')
     }
   };
