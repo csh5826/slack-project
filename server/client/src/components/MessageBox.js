@@ -15,8 +15,32 @@ class MessageBox extends Component {
     renderChannelMessages() {
         console.log('props are', this.props);
         let messages = this.props.channelMessages.map(message => {
+            let date;
+            let dateOne;
+            let dateTwo;
+            let finalDate;
+            let finalDateTwo;
+            // converting our time stamp to normal time
+            if (message.timestamp === null){
+                date = null
+                dateOne = null
+                dateTwo = null
+            }
+            else {
+                date = message.timestamp;
+                dateOne = date.indexOf('T')
+                dateTwo = date.indexOf('.')
+                finalDate=date.substring(dateOne, dateTwo);
+                finalDate = finalDate.substring(1);
+                finalDate = finalDate.slice(0, -3)
+                finalDateTwo = finalDate.slice(0,2)
+                finalDateTwo = finalDateTwo -12;
+                finalDateTwo = finalDateTwo.toString()
+                finalDate = finalDate.slice(2,5)
+                finalDate = finalDateTwo.concat(finalDate)
+            }
             return (
-                <ListGroup.Item className='color'>{message.username}: {message.content}</ListGroup.Item>
+                <ListGroup.Item className='color'>{finalDate} {message.username}: {message.content}</ListGroup.Item>
             )
         });
         return messages;
