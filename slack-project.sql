@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.7.29)
 # Database: slack-project.sql
-# Generation Time: 2020-10-23 15:10:22 +0000
+# Generation Time: 2020-11-04 14:45:46 +0000
 # ************************************************************
 
 
@@ -40,15 +40,9 @@ INSERT INTO `channels` (`channel_Id`, `channelName`, `firstUser_Id`, `secondUser
 VALUES
 	(101,'General',NULL,NULL),
 	(102,'Javascript',NULL,NULL),
-<<<<<<< HEAD
-	(103,'IceCream',NULL,NULL),
-	(104,'React-Redux',NULL,NULL)
-	
-=======
 	(103,'Ice cream',1,3),
 	(104,'React/redux',2,4),
 	(42779,'Firecrackers',1,2);
->>>>>>> 4db0b828d48fd4a10e026c48861de96efceaee01
 
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -91,8 +85,10 @@ VALUES
 	(30490,101,3,'I just went snowboarding!','2020-10-22 12:25:24'),
 	(33229,101,4,'my cat is insane','2020-10-22 12:22:38'),
 	(42536,101,1,'trick or treat?','2020-10-22 12:35:20'),
+	(42779,42779,1,'i got a wild waterfall firework','2020-10-23 11:38:18'),
 	(45390,101,1,'hey','2020-10-22 12:48:15'),
-	(46364,101,2,'treat','2020-10-22 12:23:41');
+	(46364,101,2,'treat','2020-10-22 12:23:41'),
+	(84756,42779,4,'i cannot wait to see it','2020-10-23 11:39:57');
 
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -120,12 +116,7 @@ VALUES
 	(2,'Daniel',0,'2020-10-22 12:44:47'),
 	(3,'Jim',0,'2020-10-22 12:44:47'),
 	(4,'PJ',0,'2020-10-22 12:44:47'),
-	(5,'Aissa',0,'2020-10-22 12:44:47'),
-	(7526,'sean',1,'2020-10-22 12:52:03'),
-	(15494,'sean',1,'2020-10-22 12:49:26'),
-	(15691,'sean',1,'2020-10-22 12:48:51'),
-	(18837,'frank',0,'2020-10-22 12:44:47'),
-	(26630,'frank',0,'2020-10-22 12:44:47');
+	(5,'Aissa',0,'2020-10-22 12:44:47');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

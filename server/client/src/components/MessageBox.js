@@ -36,18 +36,23 @@ class MessageBox extends Component {
                 finalDate = finalDate.substring(1);
                 finalDate = finalDate.slice(0, -3)
                 finalDateTwo = finalDate.slice(0,2)
+                finalDateTwo = finalDateTwo - 5
                 if (finalDateTwo > 12){
                     finalDateTwo = finalDateTwo -12;
+                    if (finalDateTwo >= 12) {
+                    finalDate = finalDate.concat(' PM')
+                    }
                 }
                 else {
                     finalDateTwo = finalDateTwo
+                    finalDate = finalDate.concat(' AM')
                 }
                 finalDateTwo = finalDateTwo.toString()
-                finalDate = finalDate.slice(2,5)
+                finalDate = finalDate.slice(2,8)
                 finalDate = finalDateTwo.concat(finalDate)
             }
             return (
-                <ListGroup.Item className='color'><small className="text-muted">{finalDate}</small> {message.username}: {message.content}</ListGroup.Item>
+                <ListGroup.Item className='color'> {message.username}: {message.content} <small className="text-muted float-right">{finalDate}</small></ListGroup.Item>
             )
         });
         const lastTag=Object(<ListGroup.Item className='last-msg'></ListGroup.Item>)
