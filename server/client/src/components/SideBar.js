@@ -24,9 +24,14 @@ class SideBar extends Component {
     //renders all channels
     renderChannelGroup() {
         let channels = this.props.availableChannels.map(channel => {
-            return (
-                <ListGroup.Item action key={channel.channel_Id} data-channel_Id={channel.channel_Id} onClick={this.changeChannel}>{channel.channelName}</ListGroup.Item>
-            )
+            console.log('yer currentChannelId ', this.props.currentChannelId)
+            console.log('and yer channel.channel_Id ', channel.channel_Id)
+                if (this.props.currentChannelId == channel.channel_Id ) {
+                    console.log('yer bolded, ', channel.channelName)
+                    return (<ListGroup.Item action key={channel.channel_Id} data-channel_Id={channel.channel_Id} onClick={this.changeChannel}><b>{channel.channelName}</b></ListGroup.Item>)
+                } else 
+                    console.log('yer not bolded, ', channel.channelName)
+                    return (<ListGroup.Item action key={channel.channel_Id} data-channel_Id={channel.channel_Id} onClick={this.changeChannel}>{channel.channelName}</ListGroup.Item>)
         });
         return channels;
     }
@@ -36,7 +41,7 @@ class SideBar extends Component {
             let theValue='connected'
             user.active ? theValue = 'logged-in': theValue = 'logged-out'
             return (
-                <ListGroup.Item value={theValue}>{user.username}</ListGroup.Item>
+                <ListGroup.Item key={user.username} value={theValue}>{user.username}</ListGroup.Item>
             )
         });
         return users;
