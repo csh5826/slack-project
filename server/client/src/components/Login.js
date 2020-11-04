@@ -41,7 +41,7 @@ class Login extends Component {
 
     setTimeout(() => {
       //insert delay or promise here?
-      this.props.history.push("/");
+      this.props.history.push("/Chat");
     }, 1000);
   };
 
