@@ -38,12 +38,14 @@ class MessageBox extends Component {
                 finalDateTwo = finalDate.slice(0,2)
                 if (finalDateTwo > 12){
                     finalDateTwo = finalDateTwo -12;
+                    finalDate = finalDate.concat(' PM')
                 }
                 else {
                     finalDateTwo = finalDateTwo
+                    finalDate = finalDate.concat(' AM')
                 }
                 finalDateTwo = finalDateTwo.toString()
-                finalDate = finalDate.slice(2,5)
+                finalDate = finalDate.slice(2,8)
                 finalDate = finalDateTwo.concat(finalDate)
             }
             return (
