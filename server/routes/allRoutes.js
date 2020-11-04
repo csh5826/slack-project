@@ -22,7 +22,6 @@ if (process.env.NODE_ENV === 'production') {
    console.log("end of pool")
 }
 
-
 //essentially a route for testing
 router.get('/api/', (request, response, next) => {
   response.send("hello from api root!");
@@ -131,6 +130,4 @@ router.post('/channels', (request, response, next) => {
   });
 })
 
-
 module.exports = router;
-
