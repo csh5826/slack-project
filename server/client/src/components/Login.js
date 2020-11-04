@@ -58,7 +58,7 @@ class Login extends Component {
               src={logoimage}
               className="d-block mx-auto img-fluid w-90"
             ></Image>
-              <h3>Enter your name to join:</h3>
+              <h3>Enter name</h3>
               <InputGroup className="login-form">
                 <FormControl
                   id="name-entry"
@@ -69,7 +69,7 @@ class Login extends Component {
                 variant="outline-dark"
                 onClick={this.submitLoginButton}
                 className="float-right">
-                Login
+                Continue
               </Button>
             </Col>
             <Col></Col>
