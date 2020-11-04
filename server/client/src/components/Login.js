@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 
 import footerimage from "../components/assets/c-customer-510.jpg";
+import logoimage from "../components/assets/hashtagbubble.png"
 
 class Login extends Component {
   submitLogin = (event) => {
@@ -49,7 +50,12 @@ class Login extends Component {
         <Container fluid>
           <Row>&nbsp;</Row>
           <Row>
-            <Col></Col>
+            <Col>
+            <Image
+              src={logoimage}
+              className="d-block mx-auto img-fluid w-90"
+            ></Image>
+            </Col>
             <Col md="auto">
               <h2>PROJECT SLACK by COHORT X</h2>
               <h3>Enter your name to join:</h3>
