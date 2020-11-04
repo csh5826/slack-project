@@ -76,6 +76,7 @@ class App extends Component {
   };
   refreshMessages = () => {
     this.props.fetchChannelMessages(this.props.currentChannelId);
+    console.log('channel messages are', this.props.channelMessages)
   };
 
   render() {
