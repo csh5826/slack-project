@@ -59,7 +59,7 @@ class Login extends Component {
               src={logoimage}
               className="d-block mx-auto img-fluid w-90"
             ></Image>
-              <h3>Enter name</h3>
+              <h3>Welcome</h3>
               <InputGroup className="login-form" onKeyUp={this.submitLogin} >
                 <FormControl
                   id="name-entry"
