@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { fetchChannelMessages, setChannelId } from '../actions';
 import { bindActionCreators } from "redux";
 import { ListGroup } from 'react-bootstrap';
+import { scroller } from "react-scroll";
 
 class MessageBox extends Component {
 
     componentDidMount() {
         console.log('component should mount')
         this.props.fetchChannelMessages(this.props.currentChannelId);
+        // this.scrollToSection('last-msg')
     }
 
     // renders all messages for a channel
@@ -43,12 +45,24 @@ class MessageBox extends Component {
                 <ListGroup.Item className='color'><small className="text-muted">{finalDate}</small> {message.username}: {message.content}</ListGroup.Item>
             )
         });
-        return messages;
+        const lastTag=Object(<ListGroup.Item className='last-msg'></ListGroup.Item>)
+        messages.push(lastTag)
+        return messages
     }
+
+    scrollToSection = (scrollyBit) => {
+        scroller.scrollTo(scrollyBit, {
+          duration: 800,
+          delay: 0,
+          smooth: "easeInOutQuart",
+          containerId: "chat-window",
+        });
+      };
+
 
     render() {
         return (
-            <div className="chat-window" style={{ background: 'snow', height: '90%' }}>
+            <div className="chat-window" id="chat-window" style={{ background: 'snow', height: '90%' }}>
                 <ListGroup variant="flush">
                     {this.renderChannelMessages()}
                 </ListGroup>
