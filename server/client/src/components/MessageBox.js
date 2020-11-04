@@ -34,7 +34,12 @@ class MessageBox extends Component {
                 finalDate = finalDate.substring(1);
                 finalDate = finalDate.slice(0, -3)
                 finalDateTwo = finalDate.slice(0,2)
-                finalDateTwo = finalDateTwo -12;
+                if (finalDateTwo > 12){
+                    finalDateTwo = finalDateTwo -12;
+                }
+                else {
+                    finalDateTwo = finalDateTwo
+                }
                 finalDateTwo = finalDateTwo.toString()
                 finalDate = finalDate.slice(2,5)
                 finalDate = finalDateTwo.concat(finalDate)
