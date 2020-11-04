@@ -9,7 +9,10 @@ import {
   InputGroup,
   FormControl,
   Button,
+  Image,
 } from "react-bootstrap";
+
+import footerimage from "../components/assets/c-customer-510.jpg";
 
 class Login extends Component {
   // submitLogin = (event) => {
@@ -26,7 +29,7 @@ class Login extends Component {
   //   }
   // };
 
-  submitLoginButton= (event) => {
+  submitLoginButton = (event) => {
     console.log(document.getElementById("name-entry").value);
     console.log("props", this.props);
 
@@ -38,7 +41,7 @@ class Login extends Component {
       //insert delay or promise here?
       this.props.history.push("/");
     }, 1000);
-  }
+  };
 
   render() {
     return (
@@ -50,7 +53,7 @@ class Login extends Component {
             <Col md="auto">
               <h2>PROJECT SLACK by COHORT X</h2>
               <h3>Enter your name to join:</h3>
-              <InputGroup  className="login-form">
+              <InputGroup className="login-form">
                 <FormControl
                   id="name-entry"
                   placeholder="Your name"
@@ -65,6 +68,12 @@ class Login extends Component {
               </Button>
             </Col>
             <Col></Col>
+          </Row>
+          <Row>
+            <Image
+              src={footerimage}
+              className="d-block mx-auto img-fluid w-90"
+            ></Image>
           </Row>
         </Container>
       </div>
