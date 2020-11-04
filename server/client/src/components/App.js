@@ -22,6 +22,7 @@ import {
 import SideBar from "./SideBar";
 import MessageBox from "./MessageBox";
 import ChannelTitle from "./ChannelTitle";
+import { scroller } from "react-scroll";
 import "../CSS/MessageScroll.css";
 
 const server = "http://localhost:5000/";
@@ -31,7 +32,8 @@ class App extends Component {
     // const [state, setState] = useState({name: this.props.loggedInUser.name, message: ''})
     // const [chat, setChat] = useState([])
 
-    if (this.props.loggedInUser.user_Id === 0) {
+    if (!this.props.loggedInUser) {
+      console.log('logged in user: ', this.props.loggedInUser)
       console.log("yup, I actually went here");
       this.props.history.push("/login");
     }
@@ -72,11 +74,24 @@ class App extends Component {
       // let message = {message : event.target.value };
       // setChat([...chat, {name, message}])
       event.target.value = "";
+      console.log('i are here')
+      this.scrollToSection('last-msg')
     }
   };
   refreshMessages = () => {
     this.props.fetchChannelMessages(this.props.currentChannelId);
-    console.log('channel messages are', this.props.channelMessages)
+    console.log('channel messages are', this.props.channelMessages);
+    this.scrollToSection('last-msg');
+  };
+
+
+  scrollToSection = (scrollyBit) => {
+    scroller.scrollTo(scrollyBit, {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+      containerId: "chat-window",
+    });
   };
 
   render() {

@@ -1,12 +1,14 @@
 DONE aissa -- LOGIN ISSUE
-aissa -- RESTORE ENTER ON LOGIN
--- SCROLL TO BOTTOM OF CHAT UPON ENTER
+DONE aissa -- RESTORE ENTER ON LOGIN
+BLOCKED pj-- SCROLL TO BOTTOM OF CHAT UPON ENTER
 aissa -- UPLOAD THE CLEAN DB TO THE CLEAR DB ON HIEROKU
 DONE pj -- PUT CHANNEL NAME OVER CHAT WINDOW, BOLDLY
 DONE pj -- HI, *USERNAME* NEXT TO LOGOUT BUTTON
 DONE pj -- UNSTYLE THE BUTTONS
-DONE clark -- TIMESTAMP AT END OF CHAT TEXTS
-aissa -- PROJECT SLACK WORDMARK, "by Cohort 10" ON LOGIN PAGE
-aissa -- "ENTER NAME" for user login and "CONTINUE" for button on login
+BUG clark -- TIMESTAMP CHAT TEXTS
+DONE aissa -- PROJECT SLACK WORDMARK, "by Cohort 10" ON LOGIN PAGE
+DONE aissa -- "ENTER NAME" for user login and "CONTINUE" for button on login
 DONE? pj -- FIX DOUBLE-CLICK on CHANNELS, ETC
 DONE pj -- style timestamps
+BLOCKED -- default to /login if no active user
+BUG -- logging out empty user errors but we should never see this
