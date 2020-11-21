@@ -15,8 +15,6 @@ import {
 import footerimage from "../components/assets/c-customer-510.jpg";
 import logoimage from "../components/assets/hashtagbubble.png"
 
-// const socket = io();
-
 class Login extends Component {
   submitLogin = (event) => {
     console.log('here ',event.target.value);
