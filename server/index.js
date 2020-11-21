@@ -40,6 +40,8 @@ const io = socketio(server);
 io.on('connection', (socket) => {
   console.log('new user connected')
   // socket.emit('connection', null)
+
+  
   socket.on('message', ({name, message}) => {
     console.log('received a message')
     io.emit('message', {name, message })

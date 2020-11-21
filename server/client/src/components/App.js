@@ -25,6 +25,7 @@ import ChannelTitle from "./ChannelTitle";
 import { scroller } from "react-scroll";
 import "../CSS/MessageScroll.css";
 
+const socket = io();
 const server = "http://localhost:5000/";
 
 class App extends Component {
