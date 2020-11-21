@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: localhost (MySQL 5.7.29)
-# Database: slack-project.sql
-# Generation Time: 2020-11-04 14:45:46 +0000
+# Host: us-cdbr-east-02.cleardb.com (MySQL 5.5.62-log)
+# Database: heroku_87415cfbb182aa9
+# Generation Time: 2020-11-21 13:48:52 +0000
 # ************************************************************
 
 
@@ -42,7 +42,7 @@ VALUES
 	(102,'Javascript',NULL,NULL),
 	(103,'Ice cream',1,3),
 	(104,'React/redux',2,4),
-	(42779,'Firecrackers',1,2);
+	(105,'Firecrackers',1,2);
 
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -71,24 +71,17 @@ LOCK TABLES `messages` WRITE;
 
 INSERT INTO `messages` (`message_Id`, `channel_Id`, `user_Id`, `content`, `timestamp`)
 VALUES
-	(1,101,1,'Welcome to General!',NULL),
-	(2,101,2,'Thank you!',NULL),
 	(3,102,3,'I love Javascript!',NULL),
-	(4,102,4,'It is so fun to learn',NULL),
-	(5,103,1,'Hi, my name is Clark',NULL),
 	(6,103,3,'hey man, I am jim',NULL),
 	(7,104,2,'I am so into learning guitar',NULL),
-	(8,104,4,'I know',NULL),
-	(5808,101,1,'hey','2020-10-22 12:32:58'),
+	(87,105,3,'Can\'t wait to see it, man','2020-11-04 17:02:27'),
+	(1201,101,42905,'Hey Pj!','2020-11-04 17:16:24'),
+	(9876,105,2,'I got a sweet fountain firework last weekend!','2020-11-04 17:01:48'),
+	(13697,101,29618,'hi guys!','2020-11-04 17:16:34'),
 	(15627,101,2,'what is the latest?','2020-10-22 12:24:13'),
-	(19083,101,1,'great weather today','2020-10-22 12:37:01'),
 	(30490,101,3,'I just went snowboarding!','2020-10-22 12:25:24'),
-	(33229,101,4,'my cat is insane','2020-10-22 12:22:38'),
-	(42536,101,1,'trick or treat?','2020-10-22 12:35:20'),
-	(42779,42779,1,'i got a wild waterfall firework','2020-10-23 11:38:18'),
-	(45390,101,1,'hey','2020-10-22 12:48:15'),
-	(46364,101,2,'treat','2020-10-22 12:23:41'),
-	(84756,42779,4,'i cannot wait to see it','2020-10-23 11:39:57');
+	(36052,101,4630,'Hey, friends!  Whats up!?','2020-11-04 17:16:22'),
+	(47032,104,4630,'Hello! This is in React!','2020-11-04 17:16:52');
 
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -112,11 +105,11 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`user_Id`, `username`, `active`, `timestamp`)
 VALUES
-	(1,'Clark',0,'2020-10-22 12:44:47'),
 	(2,'Daniel',0,'2020-10-22 12:44:47'),
 	(3,'Jim',0,'2020-10-22 12:44:47'),
-	(4,'PJ',0,'2020-10-22 12:44:47'),
-	(5,'Aissa',0,'2020-10-22 12:44:47');
+	(4630,'PJ',0,'2020-11-04 17:16:07'),
+	(29618,'Aissa',1,'2020-11-04 17:08:28'),
+	(42905,'Clark',1,'2020-11-04 17:07:00');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

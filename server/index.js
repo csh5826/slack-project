@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 let port = process.env.PORT || 5000;
 //socketio set up
 const server = http.createServer(app);
+
 const io = socketio(server);
 // setting up the connection and default message event
 io.on('connection', (socket) => {
@@ -47,7 +48,5 @@ io.on('connection', (socket) => {
 
 
 server.listen(port, function () {
-  console.log('Listening on port ' + port);
+  console.log('Listening on port ', port);
 });
-
-

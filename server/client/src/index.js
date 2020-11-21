@@ -9,6 +9,7 @@ import App from './components/App';
 import Login from './components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// const socket = io();
 const store = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(

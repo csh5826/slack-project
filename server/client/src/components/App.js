@@ -25,7 +25,7 @@ import ChannelTitle from "./ChannelTitle";
 import { scroller } from "react-scroll";
 import "../CSS/MessageScroll.css";
 
-// const server = "http://localhost:5000/";
+const server = "http://localhost:5000/";
 
 class App extends Component {
   componentDidMount() {
@@ -35,7 +35,7 @@ class App extends Component {
     if (!this.props.loggedInUser) {
       console.log('logged in user: ', this.props.loggedInUser)
       console.log("yup, I actually went here");
-      this.props.history.push("/login");
+      this.props.history.push("/");
     }
     //fill the store //
     this.props.fetchChannels();
